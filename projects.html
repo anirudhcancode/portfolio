@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Anirudh Ravipudi</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">AR</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="section-label">Portfolio</div>
+    <h1>Projects</h1>
+    <p>End-to-end data and AI systems built from scratch — pipelines, models, APIs, and everything in between.</p>
+  </div>
+
+  <!-- Projects -->
+  <section>
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-number">01</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag tag-orange">PySpark</span>
+          <span class="tag tag-purple">Machine Learning</span>
+          <span class="tag tag-green">FastAPI</span>
+          <span class="tag tag-yellow">Docker</span>
+        </div>
+        <h3>Fraud Detection Pipeline & ML System</h3>
+        <p>
+          End-to-end fraud detection system processing 284,807 real credit card
+          transactions. Built a PySpark ETL pipeline with behavioral feature engineering,
+          trained Random Forest and XGBoost classifiers, and deployed predictions
+          via a FastAPI REST endpoint containerized with Docker.
+        </p>
+        <div class="project-metrics">
+          <div class="metric">
+            <div class="metric-value">0.98</div>
+            <div class="metric-label">ROC-AUC</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">284K</div>
+            <div class="metric-label">Rows</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">5</div>
+            <div class="metric-label">Features Built</div>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/anirudhcancode/fraud-detection-pipeline"
+             target="_blank" class="project-link github">GitHub</a>
+          <a href="#" class="project-link demo">Live Demo — Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-number">02</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag tag-purple">NLP</span>
+          <span class="tag tag-orange">HuggingFace</span>
+          <span class="tag tag-green">FinBERT</span>
+          <span class="tag tag-yellow">FastAPI</span>
+        </div>
+        <h3>LLM Financial Report Analyzer</h3>
+        <p>
+          NLP pipeline that automatically summarizes earnings call transcripts
+          and analyzes financial sentiment using open source language models.
+          BART for abstractive summarization, FinBERT for domain-specific
+          financial sentiment, and YAKE for keyword extraction. Correctly
+          identified Apple as the only negative report in the test set.
+        </p>
+        <div class="project-metrics">
+          <div class="metric">
+            <div class="metric-value">94%</div>
+            <div class="metric-label">Confidence</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">5</div>
+            <div class="metric-label">Companies</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">3</div>
+            <div class="metric-label">NLP Models</div>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/anirudhcancode/llm-financial-analyzer"
+             target="_blank" class="project-link github">GitHub</a>
+          <a href="#" class="project-link demo">Live Demo — Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-number">03</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag tag-green">Statistics</span>
+          <span class="tag tag-orange">Python</span>
+          <span class="tag tag-purple">FastAPI</span>
+          <span class="tag tag-yellow">PostgreSQL</span>
+        </div>
+        <h3>A/B Testing Analytics Pipeline</h3>
+        <p>
+          End-to-end experimentation platform simulating an e-commerce
+          checkout button A/B test across 10,000 users over 14 days.
+          Applied z-test for statistical significance, computed confidence
+          intervals and lift metrics, and exposed results via a REST API
+          with on-demand simulation capabilities.
+        </p>
+        <div class="project-metrics">
+          <div class="metric">
+            <div class="metric-value">26%</div>
+            <div class="metric-label">Conversion Lift</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">10K</div>
+            <div class="metric-label">Users</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">0.000007</div>
+            <div class="metric-label">P-value</div>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/anirudhcancode/ab-testing-pipeline"
+             target="_blank" class="project-link github">GitHub</a>
+          <a href="#" class="project-link demo">Live Demo — Coming Soon</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">© 2025 Anirudh Ravipudi</div>
+    <div class="footer-links">
+      <a href="https://github.com/anirudhcancode" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/anirudhravipudi" target="_blank">LinkedIn</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
