@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraud Detection Demo — Anirudh Ravipudi</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .demo-hero {
+      padding: 140px 60px 60px;
+      max-width: 900px;
+    }
+    .demo-section {
+      padding: 0 60px 80px;
+      max-width: 900px;
+    }
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 32px 0;
+    }
+    .flow-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      flex: 1;
+      min-width: 160px;
+    }
+    .flow-box-label {
+      font-size: 0.72rem;
+      color: var(--accent1);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .flow-box-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+    }
+    .result-box {
+      background: var(--card);
+      border: 1px solid var(--accent3);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+    .result-box h3 {
+      font-size: 1rem;
+      color: var(--accent3);
+      margin-bottom: 16px;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .result-row:last-child {
+      border-bottom: none;
+    }
+    .result-key {
+      color: var(--text-muted);
+    }
+    .result-value {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .result-value.positive { color: var(--accent3); }
+    .result-value.negative { color: var(--accent1); }
+    .step {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 28px;
+      align-items: flex-start;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .step-content h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .step-content p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      .demo-hero, .demo-section { padding-left: 24px; padding-right: 24px; }
+      .flow-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">AR</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="demo-hero">
+    <div class="section-label">Live Demo</div>
+    <h1 style="font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; margin-bottom: 16px;">
+      Fraud Detection Pipeline
+    </h1>
+    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; max-width: 640px;">
+      This system looks at a credit card transaction and decides in milliseconds
+      whether it is likely to be fraudulent or legitimate — the same way your
+      bank automatically flags suspicious purchases on your card.
+    </p>
+  </div>
+
+  <!-- What it does -->
+  <div class="demo-section">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">What does this system actually do?</h2>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Learns from 284,807 real transactions</h4>
+        <p>The system was trained on a real dataset of credit card transactions — each one labeled as either legitimate or fraudulent. It learned the patterns that separate normal purchases from suspicious ones.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Analyzes behavioral signals</h4>
+        <p>It doesn't just look at the transaction amount. It considers behavioral patterns — how many transactions happened recently, what time of day it is, whether the amount is unusually large compared to recent history.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Returns a fraud probability score</h4>
+        <p>For every new transaction, the system returns a label (Legit or Fraud) and a probability score — how confident it is. A score of 4% means very likely legitimate. A score of 95% means very likely fraud.</p>
+      </div>
+    </div>
+
+    <!-- Flow diagram -->
+    <div class="section-label" style="margin-top: 48px;">Example</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Input → Output</h2>
+    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+      Here is what happens when a transaction is submitted to the API:
+    </p>
+
+    <div class="flow">
+      <div class="flow-box">
+        <div class="flow-box-label">Input — Transaction</div>
+        <div class="flow-box-value">
+          Amount: $150<br>
+          Time: 2:00 AM<br>
+          Recent activity: normal<br>
+          Location signals: standard
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">
+        <div class="flow-box-label">Processing</div>
+        <div class="flow-box-value">
+          Random Forest model<br>
+          analyzes 33 features<br>
+          across 100 decision trees<br>
+          and takes a majority vote
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">
+        <div class="flow-box-label">Output — Result</div>
+        <div class="flow-box-value">
+          Label: <span style="color: var(--accent3); font-weight: 700;">Legit</span><br>
+          Fraud probability: <span style="font-weight: 700;">4.13%</span><br>
+          Response time: <span style="font-weight: 700;">&lt;200ms</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result box -->
+    <div class="result-box">
+      <h3>API Response</h3>
+      <div class="result-row">
+        <span class="result-key">prediction</span>
+        <span class="result-value">0</span>
+      </div>
+      <div class="result-row">
+        <span class="result-key">label</span>
+        <span class="result-value positive">Legit</span>
+      </div>
+      <div class="result-row">
+        <span class="result-key">fraud_probability</span>
+        <span class="result-value positive">0.0413 (4.13%)</span>
+      </div>
+    </div>
+
+    <!-- Key results -->
+    <div class="section-label" style="margin-top: 48px;">Results</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">How accurate is it?</h2>
+
+    <div class="stats-bar" style="margin-bottom: 40px;">
+      <div class="stat-item">
+        <div class="stat-value">0.98</div>
+        <div class="stat-label">ROC-AUC Score</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">83%</div>
+        <div class="stat-label">Fraud Caught</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">284K</div>
+        <div class="stat-label">Transactions Trained On</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">&lt;200ms</div>
+        <div class="stat-label">Response Time</div>
+      </div>
+    </div>
+
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 40px;">
+      A score of 0.98 out of 1.0 means that if you showed the model a real fraud case
+      and a legitimate transaction side by side, it would correctly identify the
+      fraudulent one 98% of the time. It catches 83% of all fraud cases in the test set.
+    </p>
+
+    <!-- CTA -->
+    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <a href="https://fraud-detection-pipeline-p6mq.onrender.com/docs"
+         target="_blank" class="btn-primary">
+        Try it Live — Open API
+      </a>
+      <a href="https://github.com/anirudhcancode/fraud-detection-pipeline"
+         target="_blank" class="btn-secondary">
+        View Source Code
+      </a>
+      <a href="projects.html" class="btn-secondary">
+        ← Back to Projects
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">© 2026 Anirudh Ravipudi</div>
+    <div class="footer-links">
+      <a href="https://github.com/anirudhcancode" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/anirudhravipudi" target="_blank">LinkedIn</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
