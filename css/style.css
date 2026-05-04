@@ -626,17 +626,6 @@
     .page-header { padding: 120px 24px 60px; }
   }
 
-  /* ── Typing animation cursor */
-.typing-text::after {
-  content: '|';
-  animation: blink 0.7s infinite;
-  color: var(--accent1);
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
 
 /* ── Project card glow on hover */
 .project-card:hover {
@@ -748,4 +737,33 @@ body.light-mode nav {
   border-radius: 100px;
   background: linear-gradient(135deg, var(--accent1), var(--accent2));
   transition: width 1.2s ease;
+}
+
+/* ── Hero title glow pulse */
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 50%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.hero-location {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 500;
+  background: none;
+  -webkit-text-fill-color: var(--text-muted);
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 24px rgba(124, 58, 237, 0.7));
+  }
 }
