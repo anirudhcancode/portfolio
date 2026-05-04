@@ -625,3 +625,124 @@
     footer { flex-direction: column; gap: 16px; text-align: center; }
     .page-header { padding: 120px 24px 60px; }
   }
+
+  /* ── Typing animation cursor */
+.typing-text::after {
+  content: '|';
+  animation: blink 0.7s infinite;
+  color: var(--accent1);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Project card glow on hover */
+.project-card:hover {
+  border-color: var(--accent1);
+  transform: translateY(-6px);
+  box-shadow: 0 0 24px rgba(255, 107, 53, 0.15);
+}
+
+.skill-card:hover {
+  border-color: var(--accent2);
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
+}
+
+/* ── Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 200;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 200;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent1);
+  transform: scale(1.1);
+}
+
+/* ── Light mode */
+body.light-mode {
+  --bg: #ffffff;
+  --bg2: #f8f8f8;
+  --bg3: #f0f0f0;
+  --text: #1a1a1a;
+  --text-muted: #555555;
+  --border: #dddddd;
+  --card: #f5f5f5;
+}
+
+body.light-mode nav {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* ── Skills progress bars */
+.skills-progress {
+  margin-top: 48px;
+}
+
+.progress-item {
+  margin-bottom: 20px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.progress-label span:last-child {
+  color: var(--text-muted);
+}
+
+.progress-bar {
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  width: 0%;
+  transition: width 1s ease;
+}
