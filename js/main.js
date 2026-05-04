@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ── Typing animation on hero
 const typingEl = document.querySelector('.typing-text')
 if (typingEl) {
-  const words = ['Data Engineer', 'AI/ML Developer', 'Data Analyst', 'Problem Solver']
+  const words = ['Data Engineer', 'AI/ML Developer', 'Data Analyst', 'NLP Engineer', 'Problem Solver']
   let wordIndex = 0
   let charIndex = 0
   let deleting = false
