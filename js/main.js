@@ -109,16 +109,11 @@ function handleSubmit() {
   window.location.href = mailto
 }
 
-// ── Animate progress bars on scroll
-const progressObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.querySelectorAll('.progress-fill').forEach(bar => {
-        bar.style.width = bar.dataset.width + '%'
-      })
-    }
+// ── Animate progress bars immediately on load
+window.addEventListener('load', () => {
+  document.querySelectorAll('.progress-fill').forEach(bar => {
+    setTimeout(() => {
+      bar.style.width = bar.dataset.width + '%'
+    }, 500)
   })
-}, { threshold: 0.3 })
-
-const progressSection = document.getElementById('skills-progress')
-if (progressSection) progressObserver.observe(progressSection)
+})
