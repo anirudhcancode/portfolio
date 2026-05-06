@@ -17,35 +17,33 @@ function fadeIn(element, duration = 600) {
   element.style.opacity = '1'
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   const heroName = document.getElementById('hero-name')
   const typedTitle = document.getElementById('typed-title')
   const heroTag = document.getElementById('hero-tag')
   const heroSub = document.getElementById('hero-sub')
   const heroBtns = document.getElementById('hero-btns')
 
-  if (heroName && typedTitle) {
-    // Step 1 — fade in tag
-    setTimeout(() => {
-      fadeIn(heroTag, 400)
-    }, 200)
+  if (!heroName || !typedTitle) return
 
-    // Step 2 — type name
-    setTimeout(() => {
-      typeText(heroName, 'Anirudh Ravipudi', 70, () => {
-        // Step 3 — type title
-        setTimeout(() => {
-          typeText(typedTitle, 'Data Engineer & AI/ML Developer', 55, () => {
-            // Step 4 — fade in desc and buttons
-            setTimeout(() => {
-              fadeIn(heroSub)
-              setTimeout(() => fadeIn(heroBtns), 300)
-            }, 400)
-          })
-        }, 300)
-      })
-    }, 600)
-  }
+  // Step 1 — fade in tag
+  setTimeout(() => fadeIn(heroTag, 400), 200)
+
+  // Step 2 — type name
+  setTimeout(() => {
+    typeText(heroName, 'Anirudh Ravipudi', 70, () => {
+      // Step 3 — type title
+      setTimeout(() => {
+        typeText(typedTitle, 'Data Engineer & AI/ML Developer', 55, () => {
+          // Step 4 — fade in desc and buttons
+          setTimeout(() => {
+            fadeIn(heroSub)
+            setTimeout(() => fadeIn(heroBtns), 300)
+          }, 400)
+        })
+      }, 300)
+    })
+  }, 600)
 
   // ── Active nav link
   const current = window.location.pathname.split('/').pop() || 'index.html'
@@ -53,6 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (link.getAttribute('href') === current) {
       link.classList.add('active')
     }
+  })
+
+  // ── Animate progress bars
+  document.querySelectorAll('.progress-fill').forEach(bar => {
+    setTimeout(() => {
+      bar.style.width = bar.dataset.width + '%'
+    }, 2500)
   })
 })
 
@@ -111,50 +116,71 @@ toggle.addEventListener('click', () => {
   localStorage.setItem('theme', isLight ? 'light' : 'dark')
 })
 
-// ── Animate progress bars on load
-window.addEventListener('load', () => {
-  document.querySelectorAll('.progress-fill').forEach(bar => {
-    setTimeout(() => {
-      bar.style.width = bar.dataset.width + '%'
-    }, 2000)
-  })
-})
-
-// ── Particle background
+// ── Glowing particle background
 const canvas = document.getElementById('particles')
 if (canvas) {
   const ctx = canvas.getContext('2d')
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
 
-  const particles = Array.from({ length: 60 }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.5 + 0.5,
-    dx: (Math.random() - 0.5) * 0.4,
-    dy: (Math.random() - 0.5) * 0.4,
-    opacity: Math.random() * 0.4 + 0.1
-  }))
+  function resize() {
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+  }
+  resize()
+  window.addEventListener('resize', resize)
+
+  const colors = [
+    { r: 124, g: 58, b: 237 },
+    { r: 255, g: 107, b: 53 },
+    { r: 6, g: 214, b: 160 },
+  ]
+
+  const particles = Array.from({ length: 80 }, () => {
+    const color = colors[Math.floor(Math.random() * colors.length)]
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 0.5,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: (Math.random() - 0.5) * 0.4,
+      opacity: Math.random() * 0.5 + 0.1,
+      glowSize: Math.random() * 8 + 4,
+      color,
+      pulse: Math.random() * Math.PI * 2
+    }
+  })
 
   function drawParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
     particles.forEach(p => {
+      p.pulse += 0.02
+      const glowOpacity = p.opacity * (0.6 + 0.4 * Math.sin(p.pulse))
+      const { r, g, b } = p.color
+
+      // Glow effect
+      const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glowSize)
+      gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${glowOpacity})`)
+      gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`)
+
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.glowSize, 0, Math.PI * 2)
+      ctx.fillStyle = gradient
+      ctx.fill()
+
+      // Core dot
       ctx.beginPath()
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(124, 58, 237, ${p.opacity})`
+      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${glowOpacity + 0.2})`
       ctx.fill()
+
       p.x += p.dx
       p.y += p.dy
       if (p.x < 0 || p.x > canvas.width) p.dx *= -1
       if (p.y < 0 || p.y > canvas.height) p.dy *= -1
     })
+
     requestAnimationFrame(drawParticles)
   }
 
   drawParticles()
-
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-  })
 }
