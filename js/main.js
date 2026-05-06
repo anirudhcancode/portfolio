@@ -25,27 +25,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroBtns = document.getElementById('hero-btns')
 
   if (heroName && typedTitle) {
-    // Step 1 — type name after 400ms
+    // Step 1 — fade in tag
+    setTimeout(() => {
+      fadeIn(heroTag, 400)
+    }, 200)
+
+    // Step 2 — type name
     setTimeout(() => {
       typeText(heroName, 'Anirudh Ravipudi', 70, () => {
-        // Step 2 — type title after name is done
+        // Step 3 — type title
         setTimeout(() => {
           typeText(typedTitle, 'Data Engineer & AI/ML Developer', 55, () => {
-            // Step 3 — fade in tag, desc, buttons
+            // Step 4 — fade in desc and buttons
             setTimeout(() => {
-              fadeIn(heroTag)
-              setTimeout(() => fadeIn(heroSub), 200)
-              setTimeout(() => fadeIn(heroBtns), 400)
-            }, 300)
+              fadeIn(heroSub)
+              setTimeout(() => fadeIn(heroBtns), 300)
+            }, 400)
           })
         }, 300)
       })
-    }, 400)
+    }, 600)
   }
-})
 
-// ── Active nav link
-document.addEventListener('DOMContentLoaded', () => {
+  // ── Active nav link
   const current = window.location.pathname.split('/').pop() || 'index.html'
   document.querySelectorAll('.nav-links a').forEach(link => {
     if (link.getAttribute('href') === current) {
@@ -114,7 +116,7 @@ window.addEventListener('load', () => {
   document.querySelectorAll('.progress-fill').forEach(bar => {
     setTimeout(() => {
       bar.style.width = bar.dataset.width + '%'
-    }, 500)
+    }, 2000)
   })
 })
 

@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anirudh Ravipudi — Data Engineer & AI/ML</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <canvas id="particles"></canvas>
+
   <!-- Navigation -->
   <nav>
     <div class="nav-logo">AR</div>
@@ -22,23 +24,21 @@
     </ul>
   </nav>
 
- <!-- Hero -->
- <section class="hero">
-  <div class="hero-intro">
-    <div class="hero-tag" style="opacity:0;" id="hero-tag">Available for full-time roles</div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-tag" id="hero-tag" style="opacity:0;">Available for full-time roles</div>
     <div class="hero-name" id="hero-name"></div>
-    <h1 class="hero-title" id="hero-title"><span id="typed-title"></span><span class="cursor">|</span></h1>
-    <p class="hero-sub" style="opacity:0;" id="hero-sub">
+    <h1 class="hero-title"><span id="typed-title"></span><span class="cursor">|</span></h1>
+    <p class="hero-sub" id="hero-sub" style="opacity:0;">
       I build end-to-end data pipelines, machine learning systems,
       and NLP applications that turn raw data into business decisions.
       Based in New York City.
     </p>
-    <div class="hero-btns" style="opacity:0;" id="hero-btns">
+    <div class="hero-btns" id="hero-btns" style="opacity:0;">
       <a href="projects.html" class="btn-primary">View My Projects</a>
       <a href="https://github.com/anirudhcancode" target="_blank" class="btn-secondary">GitHub Profile</a>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Stats -->
   <section style="padding-top: 0;">
@@ -72,7 +72,7 @@
       <div class="skill-card">
         <div class="skill-card-icon">⚙️</div>
         <h3>Data Engineering</h3>
-        <p>PySpark, Apache Airflow, Kafka, ETL/ELT pipelines, Parquet, data modeling, PostgreSQL, Redshift</p>
+        <p>PySpark, Apache Airflow, Databricks, Snowflake, ETL/ELT pipelines, Parquet, data modeling, PostgreSQL, Redshift</p>
       </div>
       <div class="skill-card">
         <div class="skill-card-icon">🤖</div>
@@ -82,12 +82,12 @@
       <div class="skill-card">
         <div class="skill-card-icon">🧠</div>
         <h3>NLP & AI</h3>
-        <p>HuggingFace Transformers, BART, BERT, FinBERT, sentiment analysis, text summarization, LLM APIs</p>
+        <p>HuggingFace Transformers, BART, FinBERT, sentiment analysis, text summarization</p>
       </div>
       <div class="skill-card">
         <div class="skill-card-icon">☁️</div>
         <h3>Cloud & Infra</h3>
-        <p>AWS (S3, EC2, Redshift), Azure, Docker, Kubernetes, Terraform, GitHub Actions</p>
+        <p>AWS (S3, EC2, Redshift), Azure, Docker, Kubernetes</p>
       </div>
       <div class="skill-card">
         <div class="skill-card-icon">📊</div>
@@ -97,67 +97,69 @@
       <div class="skill-card">
         <div class="skill-card-icon">🔌</div>
         <h3>APIs & Backend</h3>
-        <p>FastAPI, Flask, REST APIs, SQLAlchemy, PostgreSQL, Python, SQL, Java</p>
+        <p>FastAPI, REST APIs, SQLAlchemy, PostgreSQL, Python, SQL</p>
       </div>
     </div>
+
     <!-- Skills Progress Bars -->
-<div class="skills-progress" id="skills-progress" style="margin-top: 48px;">
-  <div class="section-label" style="margin-bottom: 24px;">Proficiency</div>
+    <div class="skills-progress" id="skills-progress" style="margin-top: 48px;">
+      <div class="section-label" style="margin-bottom: 24px;">Proficiency</div>
 
-  <div class="progress-item">
-    <div class="progress-label">
-      <span>Python & SQL</span><span>Advanced</span>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" data-width="92" style="width:0%"></div>
-    </div>
-  </div>
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>Python & SQL</span><span>Advanced</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="92" style="width:0%"></div>
+        </div>
+      </div>
 
-  <div class="progress-item">
-    <div class="progress-label">
-      <span>PySpark & Data Engineering</span><span>Advanced</span>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" data-width="88" style="width:0%"></div>
-    </div>
-  </div>
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>PySpark & Data Engineering</span><span>Advanced</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="88" style="width:0%"></div>
+        </div>
+      </div>
 
-  <div class="progress-item">
-    <div class="progress-label">
-      <span>Machine Learning</span><span>Proficient</span>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" data-width="82" style="width:0%"></div>
-    </div>
-  </div>
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>Machine Learning</span><span>Proficient</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="82" style="width:0%"></div>
+        </div>
+      </div>
 
-  <div class="progress-item">
-    <div class="progress-label">
-      <span>NLP & LLMs</span><span>Proficient</span>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" data-width="78" style="width:0%"></div>
-    </div>
-  </div>
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>NLP & LLMs</span><span>Proficient</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="78" style="width:0%"></div>
+        </div>
+      </div>
 
-  <div class="progress-item">
-    <div class="progress-label">
-      <span>Cloud (AWS, Azure)</span><span>Proficient</span>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" data-width="75" style="width:0%"></div>
-    </div>
-  </div>
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>Cloud (AWS, Azure)</span><span>Proficient</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="75" style="width:0%"></div>
+        </div>
+      </div>
 
-  <div class="progress-item">
-    <div class="progress-label">
-      <span>Statistics & A/B Testing</span><span>Proficient</span>
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>Statistics & A/B Testing</span><span>Proficient</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="80" style="width:0%"></div>
+        </div>
+      </div>
     </div>
-    <div class="progress-bar">
-      <div class="progress-fill" data-width="80" style="width:0%"></div>
-    </div>
-  </div>
-</div>
+  </section>
 
   <!-- Footer -->
   <footer>
