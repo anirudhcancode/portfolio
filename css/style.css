@@ -757,3 +757,36 @@ body.light-mode nav {
   background: linear-gradient(135deg, var(--accent1), var(--accent2));
   transition: width 1.2s ease;
 }
+/* ── Hero name ── */
+.hero-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ── Blinking cursor ── */
+.cursor {
+  background: none;
+  -webkit-text-fill-color: var(--accent1);
+  animation: blink 1s infinite;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Particle canvas ── */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
