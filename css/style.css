@@ -790,3 +790,49 @@ body.light-mode nav {
   z-index: -1;
   pointer-events: none;
 }
+/* ── Hero intro centering ── */
+.hero-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  min-height: 1.5rem;
+}
+
+.cursor {
+  background: none;
+  -webkit-text-fill-color: var(--accent1);
+  animation: blink 1s infinite;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  max-width: 800px;
+  background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 50%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glow-pulse 3s ease-in-out infinite;
+  min-height: 2.5rem;
+}
+
+.hero-title .cursor {
+  -webkit-text-fill-color: var(--accent1);
+}

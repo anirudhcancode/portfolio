@@ -1,3 +1,49 @@
+// ── Cinematic hero entrance
+function typeText(element, text, speed, callback) {
+  let i = 0
+  element.textContent = ''
+  const interval = setInterval(() => {
+    element.textContent += text[i]
+    i++
+    if (i >= text.length) {
+      clearInterval(interval)
+      if (callback) callback()
+    }
+  }, speed)
+}
+
+function fadeIn(element, duration = 600) {
+  element.style.transition = `opacity ${duration}ms ease`
+  element.style.opacity = '1'
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const heroName = document.getElementById('hero-name')
+  const typedTitle = document.getElementById('typed-title')
+  const heroTag = document.getElementById('hero-tag')
+  const heroSub = document.getElementById('hero-sub')
+  const heroBtns = document.getElementById('hero-btns')
+
+  if (heroName && typedTitle) {
+    // Step 1 — type name after 400ms
+    setTimeout(() => {
+      typeText(heroName, 'Anirudh Ravipudi', 70, () => {
+        // Step 2 — type title after name is done
+        setTimeout(() => {
+          typeText(typedTitle, 'Data Engineer & AI/ML Developer', 55, () => {
+            // Step 3 — fade in tag, desc, buttons
+            setTimeout(() => {
+              fadeIn(heroTag)
+              setTimeout(() => fadeIn(heroSub), 200)
+              setTimeout(() => fadeIn(heroBtns), 400)
+            }, 300)
+          })
+        }, 300)
+      })
+    }, 400)
+  }
+})
+
 // ── Active nav link
 document.addEventListener('DOMContentLoaded', () => {
   const current = window.location.pathname.split('/').pop() || 'index.html'
@@ -7,37 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 })
-
-// ── Typing animation on hero
-const typingEl = document.querySelector('.typing-text')
-if (typingEl) {
-  const words = ['Data Engineer', 'AI/ML Developer', 'Data Analyst', 'NLP Engineer', 'Problem Solver']
-  let wordIndex = 0
-  let charIndex = 0
-  let deleting = false
-
-  function type() {
-    const current = words[wordIndex]
-    if (!deleting) {
-      typingEl.textContent = current.substring(0, charIndex + 1)
-      charIndex++
-      if (charIndex === current.length) {
-        deleting = true
-        setTimeout(type, 1800)
-        return
-      }
-    } else {
-      typingEl.textContent = current.substring(0, charIndex - 1)
-      charIndex--
-      if (charIndex === 0) {
-        deleting = false
-        wordIndex = (wordIndex + 1) % words.length
-      }
-    }
-    setTimeout(type, deleting ? 60 : 100)
-  }
-  type()
-}
 
 // ── Fade in on scroll
 const observer = new IntersectionObserver((entries) => {
@@ -94,22 +109,7 @@ toggle.addEventListener('click', () => {
   localStorage.setItem('theme', isLight ? 'light' : 'dark')
 })
 
-// ── Contact form handler
-function handleSubmit() {
-  const name = document.querySelector('input[type="text"]')?.value
-  const email = document.querySelector('input[type="email"]')?.value
-  const message = document.querySelector('textarea')?.value
-
-  if (!name || !email || !message) {
-    alert('Please fill in all fields.')
-    return
-  }
-
-  const mailto = `mailto:anirudhravipudi@outlook.com?subject=Portfolio Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`
-  window.location.href = mailto
-}
-
-// ── Animate progress bars immediately on load
+// ── Animate progress bars on load
 window.addEventListener('load', () => {
   document.querySelectorAll('.progress-fill').forEach(bar => {
     setTimeout(() => {
