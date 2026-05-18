@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Financial Intelligence Platform — Anirudh Ravipudi</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <style>
+    .demo-hero { padding: 140px 60px 60px; max-width: 960px; }
+    .demo-section { padding: 0 60px 80px; max-width: 960px; }
+    .chart-container {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .chart-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .ticker-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .ticker-btn {
+      padding: 8px 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .ticker-btn:hover { border-color: var(--accent1); color: var(--accent1); }
+    .ticker-btn.active {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      border-color: transparent;
+      color: white;
+    }
+    .prediction-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .prediction-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .prediction-ticker {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .prediction-sentiment {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .prediction-reaction {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+    .sentiment-positive { color: var(--accent3); }
+    .sentiment-negative { color: #ef476f; }
+    .sentiment-neutral { color: var(--accent4); }
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+    .phase-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .phase-card:hover { border-color: var(--accent2); transform: translateY(-4px); }
+    .phase-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent1);
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+    .phase-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .phase-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    @media (max-width: 768px) {
+      .demo-hero, .demo-section { padding-left: 24px; padding-right: 24px; }
+      .ticker-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <nav>
+    <div class="nav-logo">AR</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="demo-hero">
+    <div class="section-label">Project 02 — Extended</div>
+    <h1 style="font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; margin-bottom: 16px;">
+      LLM Financial Intelligence Platform
+    </h1>
+    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; max-width: 700px; margin-bottom: 32px;">
+      An extension of the LLM Financial Analyzer — pulling 10 years of historical stock data
+      for 10 companies, detecting major market events, analyzing earnings sentiment, and
+      predicting next-quarter price reactions using machine learning.
+    </p>
+    <div class="stats-bar" style="margin-bottom: 0;">
+      <div class="stat-item">
+        <div class="stat-value">10</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">28K+</div>
+        <div class="stat-label">Price Records</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">454</div>
+        <div class="stat-label">Earnings Analyzed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">1,849</div>
+        <div class="stat-label">Market Events</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What was built -->
+  <div class="demo-section">
+    <div class="section-label">Architecture</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">What was built</h2>
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-number">PHASE 01</div>
+        <h4>Historical Data Pipeline</h4>
+        <p>10 years of daily OHLCV price data for 10 companies pulled via yfinance and stored in PostgreSQL. 28,877 rows total.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-number">PHASE 02</div>
+        <h4>Earnings History</h4>
+        <p>Up to 49 quarters of earnings data per company — EPS actual vs estimate, revenue, net income, and surprise percentage.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-number">PHASE 03</div>
+        <h4>Event Detection & Analysis</h4>
+        <p>Detected 1,849 major price events (>5% single-day moves) across all companies. Computed 1, 5, and 30-day price reactions after each earnings release.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-number">PHASE 04</div>
+        <h4>Predictive Model</h4>
+        <p>GradientBoosting classifier trained on 435 labeled samples predicts next-quarter sentiment. Regression model predicts 30-day price reaction after earnings.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-number">PHASE 05</div>
+        <h4>API & Visualizations</h4>
+        <p>9 FastAPI endpoints serving historical data, predictions, and correlation analysis. 14 interactive Plotly charts generated automatically.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Normalized price chart -->
+  <div class="demo-section">
+    <div class="section-label">Visualization 01</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">12-Month Performance Comparison</h2>
+    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+      All 10 companies normalized to a common baseline of 100 — shows relative performance regardless of share price.
+    </p>
+    <div class="chart-container">
+      <div id="chart-normalized" style="height: 450px;"></div>
+    </div>
+  </div>
+
+  <!-- Individual price chart -->
+  <div class="demo-section">
+    <div class="section-label">Visualization 02</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Individual Price History & Events</h2>
+    <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem;">
+      Select a company to see 3 years of price history with major surge and drop events annotated.
+    </p>
+    <div class="ticker-grid">
+      <div class="ticker-btn active" onclick="loadPriceChart('AAPL', this)">AAPL</div>
+      <div class="ticker-btn" onclick="loadPriceChart('MSFT', this)">MSFT</div>
+      <div class="ticker-btn" onclick="loadPriceChart('GOOGL', this)">GOOGL</div>
+      <div class="ticker-btn" onclick="loadPriceChart('AMZN', this)">AMZN</div>
+      <div class="ticker-btn" onclick="loadPriceChart('NVDA', this)">NVDA</div>
+      <div class="ticker-btn" onclick="loadPriceChart('TSLA', this)">TSLA</div>
+      <div class="ticker-btn" onclick="loadPriceChart('PLTR', this)">PLTR</div>
+      <div class="ticker-btn" onclick="loadPriceChart('SNOW', this)">SNOW</div>
+      <div class="ticker-btn" onclick="loadPriceChart('DDOG', this)">DDOG</div>
+      <div class="ticker-btn" onclick="loadPriceChart('MDB', this)">MDB</div>
+    </div>
+    <div class="chart-container">
+      <div id="chart-price" style="height: 500px;"></div>
+    </div>
+  </div>
+
+  <!-- Heatmap -->
+  <div class="demo-section">
+    <div class="section-label">Visualization 03</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Earnings Reaction Heatmap</h2>
+    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+      30-day price reaction after each earnings release. Green = stock went up, Red = stock went down.
+    </p>
+    <div class="chart-container">
+      <div id="chart-heatmap" style="height: 400px;"></div>
+    </div>
+  </div>
+
+  <!-- Volatility -->
+  <div class="demo-section">
+    <div class="section-label">Visualization 04</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Volatility & Momentum</h2>
+    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+      Which companies are most volatile? Which have the strongest recent momentum?
+    </p>
+    <div class="chart-container">
+      <div id="chart-volatility" style="height: 400px;"></div>
+    </div>
+  </div>
+
+  <!-- Predictions -->
+  <div class="demo-section">
+    <div class="section-label">Visualization 05</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Next Quarter Predictions</h2>
+    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+      ML model predictions for next quarter's earnings sentiment and 30-day price reaction.
+      Trained on 435 labeled historical samples.
+    </p>
+    <div class="chart-container">
+      <div id="chart-predictions" style="height: 400px;"></div>
+    </div>
+  </div>
+
+  <!-- Tech stack -->
+  <div class="demo-section">
+    <div class="section-label">Stack</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Tech Stack</h2>
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-value" style="font-size: 0.95rem;">yfinance</div>
+        <div class="stat-label">Data Ingestion</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="font-size: 0.95rem;">PostgreSQL</div>
+        <div class="stat-label">Storage</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="font-size: 0.95rem;">XGBoost</div>
+        <div class="stat-label">ML Models</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="font-size: 0.95rem;">Plotly</div>
+        <div class="stat-label">Visualization</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="font-size: 0.95rem;">FastAPI</div>
+        <div class="stat-label">API Layer</div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 40px;">
+      <a href="https://github.com/anirudhcancode/llm-financial-analyzer"
+         target="_blank" class="btn-primary">View on GitHub</a>
+      <a href="llm-demo.html" class="btn-secondary">← Back to LLM Analyzer</a>
+      <a href="projects.html" class="btn-secondary">All Projects</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">© 2026 Anirudh Ravipudi</div>
+    <div class="footer-links">
+      <a href="https://github.com/anirudhcancode" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/anirudhravipudi" target="_blank">LinkedIn</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/projects.js"></script>
+  <script>
+    const BASE = 'https://raw.githubusercontent.com/anirudhcancode/llm-financial-analyzer/main/static/charts/'
+
+    async function loadChart(url, divId) {
+      try {
+        const res = await fetch(url)
+        const fig = await res.json()
+        Plotly.newPlot(divId, fig.data, fig.layout, { responsive: true, displayModeBar: false })
+      } catch (e) {
+        document.getElementById(divId).innerHTML =
+          '<p style="color: var(--text-muted); text-align: center; padding: 40px;">Chart loading...</p>'
+      }
+    }
+
+    async function loadPriceChart(ticker, btn) {
+      document.querySelectorAll('.ticker-btn').forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      await loadChart(`${BASE}${ticker}_price_history.json`, 'chart-price')
+    }
+
+    // Load all charts on page load
+    window.addEventListener('load', () => {
+      loadChart(`${BASE}normalized_prices.json`, 'chart-normalized')
+      loadChart(`${BASE}AAPL_price_history.json`, 'chart-price')
+      loadChart(`${BASE}earnings_heatmap.json`, 'chart-heatmap')
+      loadChart(`${BASE}volatility_comparison.json`, 'chart-volatility')
+      loadChart(`${BASE}predictions.json`, 'chart-predictions')
+    })
+  </script>
+</body>
+</html>
