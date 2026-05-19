@@ -199,6 +199,15 @@
     <div class="chart-container">
       <div id="chart-normalized" style="height: 450px;"></div>
     </div>
+    <div class="chart-container" style="background: var(--bg3); border-color: var(--accent2);">
+      <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8;">
+        <strong>How to read this:</strong> Every company starts at 100 on the left side regardless of their actual stock price.
+        If a company ends at 200, it doubled in value. If it ends at 50, it lost half its value.
+        This lets you compare Apple ($200/share) and NVDA ($800/share) on equal footing —
+        it's about growth, not price. The dashed line at 100 is the baseline — anything above it is a gain,
+        anything below is a loss from where it started 12 months ago.
+      </p>
+    </div>
   </div>
 
   <!-- Individual price chart -->
@@ -223,19 +232,46 @@
     <div class="chart-container">
       <div id="chart-price" style="height: 500px;"></div>
     </div>
-  </div>
-
-  <!-- Heatmap -->
-  <div class="demo-section">
-    <div class="section-label">Visualization 03</div>
-    <h2 class="section-title" style="font-size: 1.6rem;">Earnings Reaction Heatmap</h2>
-    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
-      30-day price reaction after each earnings release. Green = stock went up, Red = stock went down.
-    </p>
-    <div class="chart-container">
-      <div id="chart-heatmap" style="height: 400px;"></div>
+    <div class="chart-container" style="background: var(--bg3); border-color: var(--accent2);">
+      <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8; margin-bottom: 12px;">
+        <strong>How to read this:</strong> The top panel shows the stock's closing price over 3 years.
+        The <span style="color: #06d6a0;">▲ green triangles</span> mark days where the stock jumped more than 5% in a single day —
+        usually triggered by strong earnings, product launches, or major news.
+        The <span style="color: #ef476f;">▼ red triangles</span> mark days where it dropped more than 5% —
+        usually bad earnings, market crashes, or negative news.
+      </p>
+      <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8;">
+        The bottom panel shows <strong>30-day rolling volatility</strong> — how "choppy" the stock has been recently.
+        Higher volatility means bigger swings day to day. Lower volatility means steadier, more predictable movement.
+        TSLA and PLTR tend to have much higher volatility than MSFT or AAPL.
+      </p>
     </div>
   </div>
+
+ <!-- Heatmap -->
+ <div class="demo-section">
+  <div class="section-label">Visualization 03</div>
+  <h2 class="section-title" style="font-size: 1.6rem;">Earnings Reaction Heatmap</h2>
+  <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+    30-day price reaction after each earnings release. Green = stock went up, Red = stock went down.
+  </p>
+  <div class="chart-container">
+    <div id="chart-heatmap" style="height: 400px;"></div>
+  </div>
+  <div class="chart-container" style="background: var(--bg3); border-color: var(--accent2);">
+    <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8; margin-bottom: 12px;">
+      <strong>How to read this:</strong> Each box represents one company's stock performance
+      in the 30 days after their quarterly earnings report. Green means the stock went up,
+      red means it went down, and the number shows by exactly how much.
+    </p>
+    <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8;">
+      For example, if NVDA shows +25% for Q3 2024, it means NVIDIA's stock was 25% higher
+      30 days after they released their Q3 earnings. Reading across a row shows how one company
+      has reacted to earnings over time. Reading down a column shows how all companies
+      reacted after the same quarter — useful for spotting market-wide trends.
+    </p>
+  </div>
+</div>
 
   <!-- Volatility -->
   <div class="demo-section">
@@ -247,21 +283,53 @@
     <div class="chart-container">
       <div id="chart-volatility" style="height: 400px;"></div>
     </div>
-  </div>
-
-  <!-- Predictions -->
-  <div class="demo-section">
-    <div class="section-label">Visualization 05</div>
-    <h2 class="section-title" style="font-size: 1.6rem;">Next Quarter Predictions</h2>
-    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
-      ML model predictions for next quarter's earnings sentiment and 30-day price reaction.
-      Trained on 435 labeled historical samples.
-    </p>
-    <div class="chart-container">
-      <div id="chart-predictions" style="height: 400px;"></div>
+    <div class="chart-container" style="background: var(--bg3); border-color: var(--accent2);">
+      <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8; margin-bottom: 12px;">
+        <strong>Volatility (left chart):</strong> Shows how much a stock's price swings day to day on average.
+        High volatility means the stock moves a lot — exciting but risky. Low volatility means
+        steadier, more predictable movement. TSLA and PLTR are typically the most volatile —
+        they can move 5-10% in a single day. MSFT and AAPL tend to be the most stable.
+      </p>
+      <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8;">
+        <strong>Momentum (right chart):</strong> Shows how much the stock has moved in the last 30 days.
+        Green bars mean the stock has been going up recently — positive momentum.
+        Red bars mean it's been going down — negative momentum.
+        This is useful for spotting which companies are currently trending in which direction.
+      </p>
     </div>
   </div>
 
+ <!-- Predictions -->
+ <div class="demo-section">
+  <div class="section-label">Visualization 05</div>
+  <h2 class="section-title" style="font-size: 1.6rem;">Next Quarter Predictions</h2>
+  <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+    ML model predictions for next quarter's earnings sentiment and 30-day price reaction.
+    Trained on 435 labeled historical samples.
+  </p>
+  <div class="chart-container">
+    <div id="chart-predictions" style="height: 400px;"></div>
+  </div>
+  <div class="chart-container" style="background: var(--bg3); border-color: var(--accent2);">
+    <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8; margin-bottom: 12px;">
+      <strong>How to read this:</strong> These are machine learning predictions for what will happen
+      after each company's next earnings report. The model was trained on 435 historical earnings
+      events — it learned patterns between a company's recent volatility, momentum, and EPS surprise
+      history to predict what comes next.
+    </p>
+    <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8; margin-bottom: 12px;">
+      <strong>Left chart — Predicted 30-day price reaction:</strong> How much the model expects
+      the stock to move in the 30 days after next earnings. A bar at +15% means the model
+      predicts the stock will be 15% higher a month after earnings. Negative bars predict a decline.
+    </p>
+    <p style="font-size: 0.9rem; color: var(--text); line-height: 1.8;">
+      <strong>Right chart — Sentiment confidence:</strong> How confident the model is in its
+      prediction. 99% confidence means the historical patterns very strongly suggest a particular
+      outcome. Lower confidence means the signals are mixed. These predictions are based purely
+      on historical price and earnings patterns — not news, not fundamentals, not opinions.
+    </p>
+  </div>
+</div>
   <!-- Tech stack -->
   <div class="demo-section">
     <div class="section-label">Stack</div>
