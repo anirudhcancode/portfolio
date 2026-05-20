@@ -9,14 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    .demo-hero {
-      padding: 140px 60px 60px;
-      max-width: 900px;
-    }
-    .demo-section {
-      padding: 0 60px 80px;
-      max-width: 900px;
-    }
+    .demo-hero { padding: 140px 60px 60px; max-width: 900px; }
+    .demo-section { padding: 0 60px 80px; max-width: 900px; }
     .flow {
       display: flex;
       align-items: center;
@@ -44,10 +38,7 @@
       color: var(--text);
       line-height: 1.5;
     }
-    .flow-arrow {
-      font-size: 1.5rem;
-      color: var(--text-muted);
-    }
+    .flow-arrow { font-size: 1.5rem; color: var(--text-muted); }
     .result-box {
       background: var(--card);
       border: 1px solid var(--accent3);
@@ -55,11 +46,7 @@
       padding: 28px;
       margin: 24px 0;
     }
-    .result-box h3 {
-      font-size: 1rem;
-      color: var(--accent3);
-      margin-bottom: 16px;
-    }
+    .result-box h3 { font-size: 1rem; color: var(--accent3); margin-bottom: 16px; }
     .result-row {
       display: flex;
       justify-content: space-between;
@@ -68,18 +55,11 @@
       border-bottom: 1px solid var(--border);
       font-size: 0.9rem;
     }
-    .result-row:last-child {
-      border-bottom: none;
-    }
-    .result-key {
-      color: var(--text-muted);
-    }
-    .result-value {
-      font-weight: 600;
-      color: var(--text);
-    }
+    .result-row:last-child { border-bottom: none; }
+    .result-key { color: var(--text-muted); }
+    .result-value { font-weight: 600; color: var(--text); }
     .result-value.positive { color: var(--accent3); }
-    .result-value.negative { color: var(--accent1); }
+    .result-value.negative { color: #ef476f; }
     .step {
       display: flex;
       gap: 20px;
@@ -98,14 +78,73 @@
       font-weight: 700;
       font-size: 0.9rem;
     }
-    .step-content h4 {
-      font-size: 1rem;
-      margin-bottom: 4px;
+    .step-content h4 { font-size: 1rem; margin-bottom: 4px; }
+    .step-content p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+    .try-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 32px 0;
     }
-    .step-content p {
+    .try-buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .try-btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .try-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+    .try-btn.fraud { background: linear-gradient(135deg, #ef476f, #7c3aed); color: white; }
+    .try-btn.legit { background: linear-gradient(135deg, var(--accent3), #118ab2); color: white; }
+    .try-btn.reset { background: var(--bg3); color: var(--text-muted); border: 1px solid var(--border); }
+    .api-result {
+      background: var(--bg3);
+      border-radius: 8px;
+      padding: 20px;
+      font-family: monospace;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      display: none;
+      margin-top: 16px;
+    }
+    .api-result.visible { display: block; }
+    .api-result.fraud-result { border-left: 4px solid #ef476f; }
+    .api-result.legit-result { border-left: 4px solid var(--accent3); }
+    .loading-indicator {
+      display: none;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-top: 12px;
+    }
+    .loading-indicator.visible { display: block; }
+    .disclaimer {
+      background: rgba(255, 209, 102, 0.08);
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .disclaimer-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .disclaimer p {
       font-size: 0.88rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.7;
     }
     @media (max-width: 768px) {
       .demo-hero, .demo-section { padding-left: 24px; padding-right: 24px; }
@@ -115,7 +154,7 @@
 </head>
 <body>
   <canvas id="particles"></canvas>
-  <!-- Navigation -->
+
   <nav>
     <div class="nav-logo">AR</div>
     <ul class="nav-links">
@@ -139,7 +178,7 @@
     </p>
   </div>
 
-  <!-- What it does -->
+  <!-- How it works -->
   <div class="demo-section">
     <div class="section-label">How it works</div>
     <h2 class="section-title" style="font-size: 1.6rem;">What does this system actually do?</h2>
@@ -164,16 +203,13 @@
       <div class="step-number">3</div>
       <div class="step-content">
         <h4>Returns a fraud probability score</h4>
-        <p>For every new transaction, the system returns a label (Legit or Fraud) and a probability score — how confident it is. A score of 4% means very likely legitimate. A score of 95% means very likely fraud.</p>
+        <p>For every new transaction, the system returns a label (Legit or Fraud) and a probability score. A score of 4% means very likely legitimate. A score of 95% means very likely fraud.</p>
       </div>
     </div>
 
     <!-- Flow diagram -->
     <div class="section-label" style="margin-top: 48px;">Example</div>
     <h2 class="section-title" style="font-size: 1.6rem;">Input → Output</h2>
-    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
-      Here is what happens when a transaction is submitted to the API:
-    </p>
 
     <div class="flow">
       <div class="flow-box">
@@ -206,21 +242,53 @@
       </div>
     </div>
 
-    <!-- Result box -->
-    <div class="result-box">
-      <h3>API Response</h3>
-      <div class="result-row">
-        <span class="result-key">prediction</span>
-        <span class="result-value">0</span>
+    <!-- Live Test Section -->
+    <div class="section-label" style="margin-top: 48px;">Try It Live</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Test the model right now</h2>
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px;">
+      These are real transaction examples taken directly from the training dataset.
+      Click either button to send the transaction to the live API and see the model's prediction.
+    </p>
+
+    <div class="try-section">
+      <div class="try-buttons">
+        <button class="try-btn fraud" onclick="testAPI('fraud')">
+          🚨 Test with Fraud Example
+        </button>
+        <button class="try-btn legit" onclick="testAPI('legit')">
+          ✅ Test with Legit Example
+        </button>
+        <button class="try-btn reset" onclick="resetResult()">
+          Reset
+        </button>
       </div>
-      <div class="result-row">
-        <span class="result-key">label</span>
-        <span class="result-value positive">Legit</span>
+
+      <div class="loading-indicator" id="loading">
+        Sending to API — waiting for response...
       </div>
-      <div class="result-row">
-        <span class="result-key">fraud_probability</span>
-        <span class="result-value positive">0.0413 (4.13%)</span>
+
+      <div class="api-result" id="api-result"></div>
+
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.1em; text-transform: uppercase;">Raw API Request</div>
+        <div id="raw-request" style="font-family: monospace; font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; word-break: break-all;">
+          Click a button above to see the raw request sent to the API.
+        </div>
       </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <div class="disclaimer-title">⚠️ About the Input Format</div>
+      <p>
+        The API accepts 33 numerical features. The first 28 (V1-V28) are
+        <strong>PCA-transformed and anonymized</strong> by the original data provider for privacy reasons —
+        they represent patterns in the raw transaction data but are not human-readable.
+        This means you cannot construct a meaningful custom transaction from scratch.
+        The preset examples above use real transactions directly from the dataset.
+        In a production bank system, these features would be interpretable — merchant category,
+        geographic location, device fingerprint, and spending history.
+      </p>
     </div>
 
     <!-- Key results -->
@@ -252,19 +320,12 @@
       fraudulent one 98% of the time. It catches 83% of all fraud cases in the test set.
     </p>
 
-    <!-- CTA -->
     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
       <a href="https://fraud-detection-pipeline-p6mq.onrender.com/docs"
-         target="_blank" class="btn-primary">
-        Try it Live — Open API
-      </a>
+         target="_blank" class="btn-primary">Open Full API — Swagger UI</a>
       <a href="https://github.com/anirudhcancode/fraud-detection-pipeline"
-         target="_blank" class="btn-secondary">
-        View Source Code
-      </a>
-      <a href="projects.html" class="btn-secondary">
-        ← Back to Projects
-      </a>
+         target="_blank" class="btn-secondary">View Source Code</a>
+      <a href="projects.html" class="btn-secondary">← Back to Projects</a>
     </div>
   </div>
 
@@ -280,5 +341,54 @@
 
   <script src="js/main.js"></script>
   <script src="js/projects.js"></script>
+  <script>
+    const FRAUD_EXAMPLE = [0.0,-1.35,-0.07,2.53,1.37,-0.33,0.46,0.23,0.09,0.36,-0.08,-0.07,-0.27,-0.16,-0.15,-0.06,-0.08,-0.03,0.08,-0.41,0.08,0.08,-0.19,-1.26,0.29,0.48,-0.21,0.03,0.02,150.0,4.61,0,0]
+    const LEGIT_EXAMPLE  = [0.0,1.19,0.26,0.16,0.44,0.59,-0.27,0.81,-0.02,-0.36,-0.17,0.06,-0.05,-0.12,-0.01,0.04,0.06,0.01,-0.02,0.28,-0.02,0.02,-0.05,0.22,-0.08,0.04,0.08,0.00,0.01,2.69,0.99,14,1]
+
+    async function testAPI(type) {
+      const features = type === 'fraud' ? FRAUD_EXAMPLE : LEGIT_EXAMPLE
+      const loading = document.getElementById('loading')
+      const result = document.getElementById('api-result')
+      const rawRequest = document.getElementById('raw-request')
+
+      loading.classList.add('visible')
+      result.classList.remove('visible', 'fraud-result', 'legit-result')
+
+      rawRequest.textContent = `POST https://fraud-detection-pipeline-p6mq.onrender.com/predict\n\n{"features": [${features.join(', ')}]}`
+
+      try {
+        const res = await fetch('https://fraud-detection-pipeline-p6mq.onrender.com/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ features })
+        })
+        const data = await res.json()
+        const isFraud = data.prediction === 1 || data.fraud_probability > 0.5
+        const pct = (data.fraud_probability * 100).toFixed(1)
+
+        result.innerHTML = `
+          <div style="margin-bottom: 8px; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase;">API Response</div>
+          <div style="color: ${isFraud ? '#ef476f' : 'var(--accent3)'}; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">
+            ${isFraud ? '🚨 FRAUD DETECTED' : '✅ LEGITIMATE TRANSACTION'}
+          </div>
+          <div style="color: var(--text-muted);">prediction: <span style="color: var(--text);">${data.prediction}</span></div>
+          <div style="color: var(--text-muted);">label: <span style="color: var(--text); font-weight: 600;">${data.label}</span></div>
+          <div style="color: var(--text-muted);">fraud_probability: <span style="color: ${isFraud ? '#ef476f' : 'var(--accent3)'}; font-weight: 600;">${data.fraud_probability} (${pct}%)</span></div>
+        `
+        result.classList.add('visible', isFraud ? 'fraud-result' : 'legit-result')
+      } catch (e) {
+        result.innerHTML = `<div style="color: #ef476f;">Error connecting to API. The server may be sleeping — try again in 30 seconds.</div>`
+        result.classList.add('visible')
+      } finally {
+        loading.classList.remove('visible')
+      }
+    }
+
+    function resetResult() {
+      document.getElementById('api-result').classList.remove('visible', 'fraud-result', 'legit-result')
+      document.getElementById('loading').classList.remove('visible')
+      document.getElementById('raw-request').textContent = 'Click a button above to see the raw request sent to the API.'
+    }
+  </script>
 </body>
 </html>
