@@ -342,8 +342,14 @@
   <script src="js/main.js"></script>
   <script src="js/projects.js"></script>
   <script>
+    const API = 'https://fraud-detection-pipeline-p6mq.onrender.com'
     const FRAUD_EXAMPLE = [0.0,-1.35,-0.07,2.53,1.37,-0.33,0.46,0.23,0.09,0.36,-0.08,-0.07,-0.27,-0.16,-0.15,-0.06,-0.08,-0.03,0.08,-0.41,0.08,0.08,-0.19,-1.26,0.29,0.48,-0.21,0.03,0.02,150.0,4.61,0,0]
     const LEGIT_EXAMPLE  = [0.0,1.19,0.26,0.16,0.44,0.59,-0.27,0.81,-0.02,-0.36,-0.17,0.06,-0.05,-0.12,-0.01,0.04,0.06,0.01,-0.02,0.28,-0.02,0.02,-0.05,0.22,-0.08,0.04,0.08,0.00,0.01,2.69,0.99,14,1]
+
+    // Wake the server as soon as the page loads
+    window.addEventListener('load', () => {
+      fetch(`${API}/`).catch(() => {})
+    })
 
     async function testAPI(type) {
       const features = type === 'fraud' ? FRAUD_EXAMPLE : LEGIT_EXAMPLE
@@ -352,12 +358,13 @@
       const rawRequest = document.getElementById('raw-request')
 
       loading.classList.add('visible')
+      loading.textContent = 'Sending to API — waiting for response... (first request may take 30-60 seconds if server is waking up)'
       result.classList.remove('visible', 'fraud-result', 'legit-result')
 
-      rawRequest.textContent = `POST https://fraud-detection-pipeline-p6mq.onrender.com/predict\n\n{"features": [${features.join(', ')}]}`
+      rawRequest.textContent = `POST ${API}/predict\n\n{"features": [${features.join(', ')}]}`
 
       try {
-        const res = await fetch('https://fraud-detection-pipeline-p6mq.onrender.com/predict', {
+        const res = await fetch(`${API}/predict`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ features })
@@ -377,7 +384,13 @@
         `
         result.classList.add('visible', isFraud ? 'fraud-result' : 'legit-result')
       } catch (e) {
-        result.innerHTML = `<div style="color: #ef476f;">Error connecting to API. The server may be sleeping — try again in 30 seconds.</div>`
+        result.innerHTML = `
+          <div style="color: #ef476f; margin-bottom: 12px;">⚠️ Server is waking up — this is normal on the free tier.</div>
+          <div style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px;">Render's free tier sleeps after 15 minutes of inactivity. The server is now starting up. Please wait 30-60 seconds and try again.</div>
+          <button class="try-btn legit" onclick="testAPI('${type}')" style="padding: 10px 20px; font-size: 0.85rem;">
+            🔄 Try Again
+          </button>
+        `
         result.classList.add('visible')
       } finally {
         loading.classList.remove('visible')
