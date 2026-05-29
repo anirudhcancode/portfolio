@@ -3,43 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Companion Demo — Anirudh Ravipudi</title>
+  <title>AI Companion — Anirudh Ravipudi</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    .demo-hero {
-      padding: 140px 60px 60px;
-      max-width: 900px;
-    }
-    .demo-section {
-      padding: 0 60px 80px;
-      max-width: 900px;
-    }
-    .step {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 32px;
-      align-items: flex-start;
-    }
-    .step-number {
-      width: 36px;
-      height: 36px;
-      min-width: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      display: flex;
+    .demo-hero { padding: 140px 60px 60px; max-width: 960px; }
+    .demo-section { padding: 0 60px 80px; max-width: 960px; }
+    .wip-badge {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .step-content h4 { font-size: 1rem; margin-bottom: 4px; }
-    .step-content p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
+      gap: 8px;
+      background: rgba(255, 209, 102, 0.1);
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      color: var(--accent4);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
     }
     .feature-grid {
       display: grid;
@@ -58,34 +42,72 @@
       border-color: var(--accent2);
       transform: translateY(-4px);
     }
-    .feature-icon {
-      font-size: 1.8rem;
-      margin-bottom: 12px;
+    .feature-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .feature-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .integration-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
     }
-    .feature-card h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
+    .integration-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      transition: border-color 0.2s;
     }
-    .feature-card p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
+    .integration-card:hover { border-color: var(--accent1); }
+    .integration-icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .integration-card h5 { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+    .integration-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.4; }
+    .problem-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid #ef476f;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
     }
-    .wip-badge {
-      display: inline-flex;
+    .problem-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .problem-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+    .solution-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent3);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .solution-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .solution-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .status-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255, 209, 102, 0.1);
-      border: 1px solid rgba(255, 209, 102, 0.3);
-      color: var(--accent4);
-      padding: 8px 16px;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 24px;
+      gap: 12px;
     }
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      min-width: 10px;
+      border-radius: 50%;
+    }
+    .status-dot.live { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); }
+    .status-dot.progress { background: var(--accent4); box-shadow: 0 0 8px var(--accent4); }
+    .status-dot.planned { background: var(--text-muted); }
+    .status-item span { font-size: 0.85rem; color: var(--text); }
     @media (max-width: 768px) {
       .demo-hero, .demo-section { padding-left: 24px; padding-right: 24px; }
     }
@@ -93,7 +115,7 @@
 </head>
 <body>
   <canvas id="particles"></canvas>
-  <!-- Navigation -->
+
   <nav>
     <div class="nav-logo">AR</div>
     <ul class="nav-links">
@@ -109,124 +131,297 @@
     <div class="wip-badge">🚧 &nbsp; Currently in Development</div>
     <div class="section-label">Project 04</div>
     <h1 style="font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; margin-bottom: 16px;">
-      AI Companion Application
+      AI Companion
     </h1>
-    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; max-width: 640px;">
-      Most AI chat apps are stateless — every conversation starts from zero.
-      This is an attempt to build something fundamentally different. An AI that
-      remembers you, reads between the lines, and gets better at knowing you
-      over time.
+    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; max-width: 680px; margin-bottom: 32px;">
+      A cross-platform AI assistant built around a single idea — the most capable
+      person in your corner. Not a chatbot. Not a productivity tool. A persistent
+      presence that knows your life and uses all of it to be genuinely useful in
+      the way only someone who actually knows you can be.
     </p>
+    <div class="stats-bar" style="margin-bottom: 0;">
+      <div class="stat-item">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Platforms</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">10+</div>
+        <div class="stat-label">Integrations</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">3</div>
+        <div class="stat-label">AI Layers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">🔒</div>
+        <div class="stat-label">Private</div>
+      </div>
+    </div>
   </div>
 
   <!-- The Problem -->
   <div class="demo-section">
     <div class="section-label">The Problem</div>
-    <h2 class="section-title" style="font-size: 1.6rem;">What's wrong with existing AI apps?</h2>
+    <h2 class="section-title" style="font-size: 1.6rem;">Every AI resets. Every conversation starts from zero.</h2>
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 32px;">
+      The tools people use daily — Siri, ChatGPT, Google Assistant — are reactive,
+      stateless, and generic. They answer questions. They don't know you.
+      The real need isn't a smarter search engine.
+    </p>
 
-    <div class="step">
-      <div class="step-number">1</div>
-      <div class="step-content">
-        <h4>They forget everything</h4>
-        <p>Every conversation starts from scratch. They don't know what you talked about last week, what you're going through, or anything about who you are unless you tell them again every single time.</p>
-      </div>
+    <div class="problem-card">
+      <h4>They forget everything</h4>
+      <p>Every conversation starts from scratch. They don't know what you talked about last week, what you're going through, or anything about who you are unless you tell them again every single time.</p>
     </div>
-
-    <div class="step">
-      <div class="step-number">2</div>
-      <div class="step-content">
-        <h4>They can't read the room</h4>
-        <p>They respond the same way whether you're excited, exhausted, or having the worst day of your life. There's no awareness of emotional state — just pattern matching on words.</p>
-      </div>
+    <div class="problem-card">
+      <h4>They can't read the room</h4>
+      <p>They respond the same way whether you're excited, exhausted, or having the worst day of your life. No awareness of emotional state — just pattern matching on words.</p>
     </div>
-
-    <div class="step">
-      <div class="step-number">3</div>
-      <div class="step-content">
-        <h4>They're purely reactive</h4>
-        <p>They only respond when you message first. They never check in, never follow up on something you mentioned last week, never reach out when you've been quiet for a while.</p>
-      </div>
+    <div class="problem-card">
+      <h4>They're purely reactive</h4>
+      <p>They only respond when you message first. They never check in, never follow up on something you mentioned last week, never reach out when you've been quiet for a while.</p>
     </div>
+    <div class="problem-card">
+      <h4>They're siloed</h4>
+      <p>Your health app doesn't talk to your calendar. Your music doesn't inform your morning briefing. Your workout history doesn't connect to your nutrition. Everything is disconnected.</p>
+    </div>
+  </div>
 
-    <!-- What's being built -->
-    <div class="section-label" style="margin-top: 48px;">What's Being Built</div>
-    <h2 class="section-title" style="font-size: 1.6rem;">How this is different</h2>
+  <!-- The Solution -->
+  <div class="demo-section">
+    <div class="section-label">The Solution</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">What makes this different</h2>
+
+    <div class="solution-card">
+      <h4>Persistent memory across time</h4>
+      <p>Doesn't just store conversation logs — maintains a living understanding of the person. Facts, patterns, emotional tells, ongoing situations, relationships, goals. The longer you use it, the more it knows, and the more irreplaceable it becomes.</p>
+    </div>
+    <div class="solution-card">
+      <h4>Cross-domain synthesis</h4>
+      <p>Health data, music, calendar, email, location patterns, workout history, nutrition — synthesized into one coherent picture before every response. No other product does this.</p>
+    </div>
+    <div class="solution-card">
+      <h4>Emotional intelligence</h4>
+      <p>Reads between the lines — message patterns, energy, time of day, deflection signals — to understand how someone is actually feeling, not just what they're saying. Mood transitions happen slowly, the way a real friend reads you.</p>
+    </div>
+    <div class="solution-card">
+      <h4>Proactive, not reactive</h4>
+      <p>Reaches out. Morning briefings, check-ins, pattern-based suggestions, reminders surfaced at the right moment. Notices when something's worth flagging before you think to ask.</p>
+    </div>
+    <div class="solution-card">
+      <h4>The relationship progresses</h4>
+      <p>Early on it's curious and gathering. Later it's familiar and anticipating. The depth of what it can say and how it says it changes as the relationship develops — something no other AI product has been designed to do.</p>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="demo-section">
+    <div class="section-label">Features</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">What it does</h2>
 
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-icon">🧠</div>
-        <h4>Semantic Memory</h4>
-        <p>Every conversation is analyzed and memorable facts are stored as vector embeddings. When you mention something, the system retrieves the most semantically relevant memories — not just keyword matches.</p>
+        <div class="feature-icon">🌅</div>
+        <h4>Morning Briefing</h4>
+        <p>Delivered at the right time — covers health in plain English, weather, calendar, curated news, and one personal callback from recent conversation. Conversational, not a bullet list.</p>
       </div>
-
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h4>Persistent Memory</h4>
+        <p>Tracks important people, ongoing situations, goals, preferences, and emotional threads. Surfaces them naturally at the right moment — not intrusively, just present.</p>
+      </div>
       <div class="feature-card">
         <div class="feature-icon">🎭</div>
-        <h4>Emotion Detection</h4>
-        <p>A multi-layer pipeline analyzes behavioral signals — message length, punctuation patterns, time of day, vocabulary — and cross-references labeled emotion datasets to infer emotional state before responding.</p>
+        <h4>Emotional Awareness</h4>
+        <p>Multi-signal pipeline reads behavioral patterns — message length, punctuation, energy, time of day — to understand emotional state without being asked.</p>
       </div>
-
       <div class="feature-card">
         <div class="feature-icon">🎨</div>
         <h4>Mood-Adaptive UI</h4>
-        <p>As the system infers your emotional state, the entire app's color palette transitions smoothly across 12 distinct mood themes — the interface itself responds to how you're feeling.</p>
+        <p>As emotional state is inferred, the app's entire color palette transitions across 12 distinct mood themes — the interface itself responds to how you're feeling.</p>
       </div>
-
       <div class="feature-card">
         <div class="feature-icon">⏰</div>
         <h4>Proactive Check-ins</h4>
-        <p>When you mention something worth following up on — an interview, a hard conversation, waiting on news — the system schedules a message to follow up at the right time without you having to remember.</p>
+        <p>When you mention something worth following up on — an interview, a hard conversation, waiting on news — it schedules a message to follow up at the right time automatically.</p>
       </div>
-
       <div class="feature-card">
-        <div class="feature-icon">🌅</div>
-        <h4>Morning Briefing</h4>
-        <p>Starts your day with a natural, conversational summary — live weather, relevant news, and a personalized opener based on what's been going on in your life recently.</p>
+        <div class="feature-icon">🎵</div>
+        <h4>Music Awareness</h4>
+        <p>Now playing, listening history, taste profiling, playlist creation, artist alerts, concert detection, and hum-to-song identification. Music becomes a layer of context.</p>
       </div>
-
       <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h4>Privacy First</h4>
-        <p>Row-level security ensures your data is completely isolated. Nobody else can ever access your memories, conversations, or emotional history. It's yours only.</p>
+        <div class="feature-icon">💪</div>
+        <h4>Workout & Nutrition Logging</h4>
+        <p>Conversational — just say what you did or ate. It logs, tracks, and cross-references with health data. References past performance and flags when recovery suggests rest.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h4>Smart Navigation</h4>
+        <p>Natural language navigation with context — stop for the cheapest gas, avoid highways. Detects when you're in the car and shifts into driving mode automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📰</div>
+        <h4>Personalized News</h4>
+        <p>Tracks what you engage with versus skip over time. The morning briefing becomes progressively more curated — after weeks of use, it's genuinely personalized.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔖</div>
+        <h4>Remind Me Later</h4>
+        <p>A universal "come back to this" system for anything — artists, exercises, restaurants, tasks. Reminders surface contextually based on location and time, not just as timers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🪞</div>
+        <h4>The Mirror</h4>
+        <p>Weekly or monthly — a reflection written unprompted. What was noticed about the week. Energy patterns, recurring themes, things that seemed heavy, things that seemed good.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h4>The Social Layer</h4>
+        <p>Opt-in connections between users — partners, close friends, family. Granular sharing controls. Bridges gaps between connected people with explicit permission only.</p>
       </div>
     </div>
+  </div>
 
-    <!-- Tech stack -->
-    <div class="section-label" style="margin-top: 48px;">Tech Stack</div>
-    <h2 class="section-title" style="font-size: 1.6rem;">What's powering it</h2>
-    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 32px;">
-      Built across mobile, web, and backend from a single cohesive architecture.
+  <!-- Integrations -->
+  <div class="demo-section">
+    <div class="section-label">Integrations</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Connected to your life</h2>
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px;">
+      Unlike siloed AI tools, this assistant synthesizes data across every major
+      dimension of your life into one coherent picture before every response.
     </p>
 
-    <div class="stats-bar" style="margin-bottom: 40px;">
-      <div class="stat-item">
-        <div class="stat-value" style="font-size: 1rem;">React Native</div>
-        <div class="stat-label">iOS · Android · Web</div>
+    <div class="integration-grid">
+      <div class="integration-card">
+        <div class="integration-icon">⌚</div>
+        <h5>Whoop</h5>
+        <p>Recovery, HRV, sleep, strain — silently injected into every conversation</p>
       </div>
-      <div class="stat-item">
-        <div class="stat-value" style="font-size: 1rem;">Node.js</div>
-        <div class="stat-label">API Orchestration</div>
+      <div class="integration-card">
+        <div class="integration-icon">🎵</div>
+        <h5>Spotify</h5>
+        <p>Now playing, history, taste profiling, playlist creation, concert detection</p>
       </div>
-      <div class="stat-item">
-        <div class="stat-value" style="font-size: 1rem;">pgvector</div>
-        <div class="stat-label">Semantic Memory</div>
+      <div class="integration-card">
+        <div class="integration-icon">📧</div>
+        <h5>Gmail</h5>
+        <p>Inbox monitoring, classification, summarization, reply drafting in your voice</p>
       </div>
-      <div class="stat-item">
-        <div class="stat-value" style="font-size: 1rem;">Claude API</div>
-        <div class="stat-label">Language Model</div>
+      <div class="integration-card">
+        <div class="integration-icon">📅</div>
+        <h5>Google Calendar</h5>
+        <p>Calendar awareness feeds morning briefing and proactive suggestions</p>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">🗺️</div>
+        <h5>Maps</h5>
+        <p>Apple Maps, Google Maps, Waze — natural language navigation with context</p>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">🔍</div>
+        <h5>Web Search</h5>
+        <p>Real-time search for anything outside training data, URL reading and summarization</p>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">🌤️</div>
+        <h5>Weather</h5>
+        <p>Live weather data woven naturally into the morning briefing and suggestions</p>
+      </div>
+      <div class="integration-card">
+        <div class="integration-icon">🎤</div>
+        <h5>Voice Mode</h5>
+        <p>Voice input and text-to-speech. In driving mode, responses are read aloud automatically</p>
       </div>
     </div>
+  </div>
 
-    <!-- Status -->
+  <!-- Current Status -->
+  <div class="demo-section">
     <div class="section-label">Current Status</div>
     <h2 class="section-title" style="font-size: 1.6rem;">Where things stand</h2>
-    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 40px;">
-      This project is actively in development. The core architecture — memory system,
-      emotion pipeline, backend API, and mobile UI — is built and functional.
-      The focus right now is on refinement, testing, and preparing for a broader release.
-      More details coming soon.
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px;">
+      Core product is live. Integrations are actively being added.
     </p>
 
-    <!-- CTA -->
+    <div class="status-grid">
+      <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>iOS App</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>Android App</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>Web Platform</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>Whoop Integration</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>Memory System</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>Emotion Detection</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>Morning Briefing</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>Mood-Adaptive UI</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot progress"></div>
+        <span>Spotify</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot progress"></div>
+        <span>Gmail + Calendar</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot progress"></div>
+        <span>Navigation</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot progress"></div>
+        <span>Voice Mode</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot planned"></div>
+        <span>Social Layer</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot planned"></div>
+        <span>The Mirror</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot planned"></div>
+        <span>News Personalization</span>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted);">
+        <div class="status-dot live" style="width:10px;height:10px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);"></div> Live
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted);">
+        <div class="status-dot progress" style="width:10px;height:10px;border-radius:50%;background:var(--accent4);box-shadow:0 0 8px var(--accent4);"></div> In Progress
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted);">
+        <div class="status-dot planned" style="width:10px;height:10px;border-radius:50%;background:var(--text-muted);"></div> Planned
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="demo-section">
     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
       <a href="contact.html" class="btn-primary">Get in Touch</a>
       <a href="projects.html" class="btn-secondary">← Back to Projects</a>
