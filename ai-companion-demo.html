@@ -83,6 +83,16 @@
     }
     .solution-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
     .solution-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+    .principle-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent1);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .principle-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .principle-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
     .status-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -134,10 +144,10 @@
       AI Companion
     </h1>
     <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; max-width: 680px; margin-bottom: 32px;">
-      A cross-platform AI assistant built around a single idea — a capable person always in your corner.
-      Not a chatbot. Not a productivity tool. A persistent
-      presence that knows your life and uses all of it to be genuinely useful in
-      the way only someone who actually knows you can be.
+      A cross-platform AI assistant built around a simple premise that's harder to engineer
+      than it sounds — a presence that doesn't leave, whoever you turn out to be. Not a
+      productivity tool. Not a therapy substitute. Something that lives in the space between,
+      and earns the right to go deeper over time rather than assuming it.
     </p>
     <div class="stats-bar" style="margin-bottom: 0;">
       <div class="stat-item">
@@ -185,6 +195,10 @@
       <h4>They're siloed</h4>
       <p>Your health app doesn't talk to your calendar. Your music doesn't inform your morning briefing. Your workout history doesn't connect to your nutrition. Everything is disconnected.</p>
     </div>
+    <div class="problem-card">
+      <h4>The few that remember overstep</h4>
+      <p>Some products swing the other way — surfacing everything they've inferred about you, unprompted, the moment they learn it. That doesn't read as attentive. It reads as being watched.</p>
+    </div>
   </div>
 
   <!-- The Solution -->
@@ -193,12 +207,20 @@
     <h2 class="section-title" style="font-size: 1.6rem;">What makes this different</h2>
 
     <div class="solution-card">
+      <h4>Two layers, deliberately separated</h4>
+      <p>A "hands" layer and a "mind" layer. Hands is tool-orchestrated reasoning — the model decides in the moment whether something calls for health data, music context, a live web search, or nothing at all, instead of routing through brittle keyword detection. Mind is what makes the relationship feel continuous: a character understanding that rewrites itself after every conversation, tracked situations with their own lifecycle, and a relationship-stage model.</p>
+    </div>
+    <div class="solution-card">
       <h4>Persistent memory across time</h4>
       <p>Doesn't just store conversation logs — maintains a living understanding of the person. Facts, patterns, emotional tells, ongoing situations, relationships, goals. The longer you use it, the more it knows, and the more irreplaceable it becomes.</p>
     </div>
     <div class="solution-card">
       <h4>Cross-domain synthesis</h4>
       <p>Health data, music, calendar, email, location patterns, workout history, nutrition — synthesized into one coherent picture before every response. No other product does this.</p>
+    </div>
+    <div class="solution-card">
+      <h4>Trust-gated disclosure</h4>
+      <p>Understanding something about a person and being allowed to say it out loud are two different things. The system holds a private, often clinical-grade read on patterns in someone's life — but what it actually voices is gated by how deep the relationship is, whether the person has brought the topic up themselves, and whether the moment invites it. It never just decides "I know this, so I'll say it."</p>
     </div>
     <div class="solution-card">
       <h4>Emotional intelligence</h4>
@@ -211,6 +233,26 @@
     <div class="solution-card">
       <h4>The relationship progresses</h4>
       <p>Early on it's curious and gathering. Later it's familiar and anticipating. The depth of what it can say and how it says it changes as the relationship develops — something no other AI product has been designed to do.</p>
+    </div>
+  </div>
+
+  <!-- Data Philosophy -->
+  <div class="demo-section">
+    <div class="section-label">Data Philosophy</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">What it keeps and why</h2>
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 32px;">
+      A system that accumulates this much about a person can't treat privacy as an
+      afterthought. Data minimization and transparency were built in from the start,
+      not bolted on later.
+    </p>
+
+    <div class="principle-card">
+      <h4>Minimal by design</h4>
+      <p>The system is built to retain what actually improves the relationship and let the rest go — not to accumulate data because it's available.</p>
+    </div>
+    <div class="principle-card">
+      <h4>Shown back to you, honestly</h4>
+      <p>An early, user-facing view lets you see the system's evolving model of you directly — explicitly framed as its observation, not as ground truth about who you are. Most products in this space treat their memory layer as an opaque backend detail. This one doesn't.</p>
     </div>
   </div>
 
@@ -341,7 +383,11 @@
     <div class="section-label">Current Status</div>
     <h2 class="section-title" style="font-size: 1.6rem;">Where things stand</h2>
     <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px;">
-      Core product is live. Integrations are actively being added.
+      Core architecture is built and deployed in production — tool-orchestrated reasoning
+      across live integrations, the full memory pipeline with deduplication and
+      recency-aware retrieval, and session continuity tuned across minutes, hours, and days.
+      Current focus is hardening data quality and defining explicit safety boundaries so
+      conversations that drift outside what the system is built to handle stay there reliably.
     </p>
 
     <div class="status-grid">
@@ -378,6 +424,10 @@
         <span>Mood-Adaptive UI</span>
       </div>
       <div class="status-item">
+        <div class="status-dot live"></div>
+        <span>User-Facing Memory View</span>
+      </div>
+      <div class="status-item">
         <div class="status-dot progress"></div>
         <span>Spotify</span>
       </div>
@@ -392,6 +442,14 @@
       <div class="status-item">
         <div class="status-dot progress"></div>
         <span>Voice Mode</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot progress"></div>
+        <span>Data Quality Hardening</span>
+      </div>
+      <div class="status-item">
+        <div class="status-dot progress"></div>
+        <span>Safety Boundaries</span>
       </div>
       <div class="status-item">
         <div class="status-dot planned"></div>
