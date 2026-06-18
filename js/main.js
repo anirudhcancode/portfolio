@@ -96,24 +96,31 @@ backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 
-// ── Dark / Light mode toggle
+// ── Cosmic / Navy mode toggle
+// NOTE: the CSS class is still named "light-mode" for backwards compatibility
+// with existing stylesheets, but it now represents the deep-navy dark theme,
+// since the site's default (no class) is the white/cosmic theme. The toggle
+// logic and icons below reflect that — the icons/labels track what state
+// you're SWITCHING TO, same as before.
 const toggle = document.createElement('button')
 toggle.className = 'theme-toggle'
-toggle.innerHTML = '☀️'
-toggle.title = 'Toggle light/dark mode'
+toggle.innerHTML = '🌙'
+toggle.title = 'Toggle navy mode'
 document.body.appendChild(toggle)
 
-const savedTheme = localStorage.getItem('theme') || 'dark'
-if (savedTheme === 'light') {
+const savedTheme = localStorage.getItem('theme') || 'cosmic'
+if (savedTheme === 'navy') {
   document.body.classList.add('light-mode')
-  toggle.innerHTML = '🌙'
+  toggle.innerHTML = '☀️'
+  toggle.title = 'Toggle cosmic mode'
 }
 
 toggle.addEventListener('click', () => {
   document.body.classList.toggle('light-mode')
-  const isLight = document.body.classList.contains('light-mode')
-  toggle.innerHTML = isLight ? '🌙' : '☀️'
-  localStorage.setItem('theme', isLight ? 'light' : 'dark')
+  const isNavy = document.body.classList.contains('light-mode')
+  toggle.innerHTML = isNavy ? '☀️' : '🌙'
+  toggle.title = isNavy ? 'Toggle cosmic mode' : 'Toggle navy mode'
+  localStorage.setItem('theme', isNavy ? 'navy' : 'cosmic')
 })
 
 // ── Glowing particle background (home page only)
@@ -135,32 +142,37 @@ if (isHomePage) {
     window.addEventListener('resize', resize)
 
     const colors = [
-      { r: 124, g: 58, b: 237 },
-      { r: 255, g: 107, b: 53 },
-      { r: 6, g: 214, b: 160 },
+      { r: 37, g: 99, b: 235 },
+      { r: 220, g: 38, b: 38 },
+      { r: 212, g: 160, b: 23 },
     ]
 
-    const particles = Array.from({ length: 80 }, () => {
+    const particles = Array.from({ length: 70 }, () => {
       const color = colors[Math.floor(Math.random() * colors.length)]
       return {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 0.5,
-        dx: (Math.random() - 0.5) * 0.4,
-        dy: (Math.random() - 0.5) * 0.4,
-        opacity: Math.random() * 0.5 + 0.1,
-        glowSize: Math.random() * 8 + 4,
+        r: Math.random() * 1.6 + 0.4,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.35 + 0.1,
+        glowSize: Math.random() * 7 + 4,
         color,
         pulse: Math.random() * Math.PI * 2
       }
     })
 
+    function isNavyMode() {
+      return document.body.classList.contains('light-mode')
+    }
+
     function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const boost = isNavyMode() ? 1.6 : 1
 
       particles.forEach(p => {
         p.pulse += 0.02
-        const glowOpacity = p.opacity * (0.6 + 0.4 * Math.sin(p.pulse))
+        const glowOpacity = p.opacity * boost * (0.6 + 0.4 * Math.sin(p.pulse))
         const { r, g, b } = p.color
 
         const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glowSize)
@@ -174,7 +186,7 @@ if (isHomePage) {
 
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${glowOpacity + 0.2})`
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(glowOpacity + 0.2, 0.9)})`
         ctx.fill()
 
         p.x += p.dx
