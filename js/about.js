@@ -11,10 +11,14 @@ if (canvas) {
   window.addEventListener('resize', resize)
 
   const colors = [
-    { r: 124, g: 58, b: 237 },
-    { r: 255, g: 107, b: 53 },
-    { r: 6, g: 214, b: 160 },
+    { r: 37, g: 99, b: 235 },
+    { r: 220, g: 38, b: 38 },
+    { r: 212, g: 160, b: 23 },
   ]
+
+  function isNavyMode() {
+    return document.body.classList.contains('light-mode')
+  }
 
   const dots = Array.from({ length: 60 }, () => {
     const color = colors[Math.floor(Math.random() * colors.length)]
@@ -34,6 +38,7 @@ if (canvas) {
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    const boost = isNavyMode() ? 1.6 : 1
 
     // Draw connecting lines
     for (let i = 0; i < dots.length; i++) {
@@ -43,7 +48,7 @@ if (canvas) {
         const dist = Math.sqrt(dx * dx + dy * dy)
 
         if (dist < MAX_DIST) {
-          const lineOpacity = (1 - dist / MAX_DIST) * 0.15
+          const lineOpacity = (1 - dist / MAX_DIST) * 0.15 * boost
           const { r, g, b } = dots[i].color
           ctx.beginPath()
           ctx.moveTo(dots[i].x, dots[i].y)
@@ -58,7 +63,7 @@ if (canvas) {
     // Draw dots
     dots.forEach(p => {
       p.pulse += 0.015
-      const glowOpacity = p.opacity * (0.7 + 0.3 * Math.sin(p.pulse))
+      const glowOpacity = p.opacity * boost * (0.7 + 0.3 * Math.sin(p.pulse))
       const { r, g, b } = p.color
 
       const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 6)
@@ -72,7 +77,7 @@ if (canvas) {
 
       ctx.beginPath()
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${glowOpacity + 0.2})`
+      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(glowOpacity + 0.2, 0.9)})`
       ctx.fill()
 
       p.x += p.dx
