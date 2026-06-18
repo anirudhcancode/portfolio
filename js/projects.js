@@ -11,10 +11,14 @@ if (canvas) {
   window.addEventListener('resize', resize)
 
   const colors = [
-    { r: 124, g: 58, b: 237 },
-    { r: 255, g: 107, b: 53 },
-    { r: 6, g: 214, b: 160 },
+    { r: 37, g: 99, b: 235 },
+    { r: 220, g: 38, b: 38 },
+    { r: 212, g: 160, b: 23 },
   ]
+
+  function isNavyMode() {
+    return document.body.classList.contains('light-mode')
+  }
 
   // ── Subtle background particles
   const particles = Array.from({ length: 40 }, () => {
@@ -81,11 +85,12 @@ if (canvas) {
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    const boost = isNavyMode() ? 1.6 : 1
 
     // Draw background particles
     particles.forEach(p => {
       p.pulse += 0.02
-      const glowOpacity = p.opacity * (0.6 + 0.4 * Math.sin(p.pulse))
+      const glowOpacity = p.opacity * boost * (0.6 + 0.4 * Math.sin(p.pulse))
       const { r, g, b } = p.color
 
       const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glowSize)
@@ -99,7 +104,7 @@ if (canvas) {
 
       ctx.beginPath()
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${glowOpacity + 0.2})`
+      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(glowOpacity + 0.2, 0.9)})`
       ctx.fill()
 
       p.x += p.dx
