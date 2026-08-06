@@ -104,21 +104,21 @@ backToTop.addEventListener('click', () => {
 // you're SWITCHING TO, same as before.
 const toggle = document.createElement('button')
 toggle.className = 'theme-toggle'
-toggle.innerHTML = '🌙'
+toggle.innerHTML = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>'
 toggle.title = 'Toggle navy mode'
 document.body.appendChild(toggle)
 
 const savedTheme = localStorage.getItem('theme') || 'cosmic'
 if (savedTheme === 'navy') {
   document.body.classList.add('light-mode')
-  toggle.innerHTML = '☀️'
+  toggle.innerHTML = '<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>'
   toggle.title = 'Toggle cosmic mode'
 }
 
 toggle.addEventListener('click', () => {
   document.body.classList.toggle('light-mode')
   const isNavy = document.body.classList.contains('light-mode')
-  toggle.innerHTML = isNavy ? '☀️' : '🌙'
+  toggle.innerHTML = isNavy ? '<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>' : '<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>'
   toggle.title = isNavy ? 'Toggle cosmic mode' : 'Toggle navy mode'
   localStorage.setItem('theme', isNavy ? 'navy' : 'cosmic')
 })
