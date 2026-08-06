@@ -314,11 +314,21 @@
       </div>
     </div>
 
-    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 40px;">
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px;">
       A score of 0.98 out of 1.0 means that if you showed the model a real fraud case
       and a legitimate transaction side by side, it would correctly identify the
       fraudulent one 98% of the time. It catches 83% of all fraud cases in the test set.
     </p>
+
+    <div class="disclaimer" style="margin-bottom: 40px;">
+      <div class="disclaimer-title">Model Selection</div>
+      <p>
+        Random Forest was selected for deployment (83% recall, 77% precision) over
+        XGBoost (84% recall, 89% precision) to prioritize catching fraud over
+        minimizing false positives — a deliberate tradeoff given the cost asymmetry
+        of missed fraud vs. flagged legitimate transactions.
+      </p>
+    </div>
 
     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
       <a href="https://fraud-detection-pipeline-p6mq.onrender.com/docs"

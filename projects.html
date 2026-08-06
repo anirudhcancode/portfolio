@@ -49,10 +49,18 @@
         <h3>Fraud Detection Pipeline & ML System</h3>
         <p>
           End-to-end fraud detection system processing 284,807 real credit card
-          transactions. Built a PySpark ETL pipeline with behavioral feature engineering,
-          trained Random Forest and XGBoost classifiers, and deployed predictions
-          via a FastAPI REST endpoint containerized with Docker.
+          transactions. Built a PySpark ETL pipeline with behavioral feature
+          engineering (rolling-window transaction patterns via Spark's distributed
+          windowing), trained and compared Random Forest and XGBoost classifiers,
+          and deployed the stronger recall model via a FastAPI REST endpoint
+          containerized with Docker.
         </p>
+        <div class="project-note">
+          Random Forest was selected for deployment (83% recall, 77% precision)
+          over XGBoost (84% recall, 89% precision) to prioritize catching fraud
+          over minimizing false positives — a deliberate tradeoff given the cost
+          asymmetry of missed fraud vs. flagged legitimate transactions.
+        </div>
         <div class="project-metrics">
           <div class="metric">
             <div class="metric-value">0.98</div>
@@ -63,8 +71,8 @@
             <div class="metric-label">Rows</div>
           </div>
           <div class="metric">
-            <div class="metric-value">5</div>
-            <div class="metric-label">Features Built</div>
+            <div class="metric-value">83%</div>
+            <div class="metric-label">Recall</div>
           </div>
         </div>
         <div class="project-links">
@@ -182,11 +190,11 @@
         </p>
         <div class="project-metrics">
           <div class="metric">
-            <div class="metric-value">4</div>
+            <div class="metric-value">3</div>
             <div class="metric-label">Platforms</div>
           </div>
           <div class="metric">
-            <div class="metric-value">10+</div>
+            <div class="metric-value">5</div>
             <div class="metric-label">Integrations</div>
           </div>
           <div class="metric">
