@@ -32,6 +32,45 @@
       color: var(--text-muted);
       margin-top: 4px;
     }
+    .marker-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lead-block { margin-bottom: 32px; }
+    .lead-block:last-child { margin-bottom: 0; }
+    .lead-block p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.6;
+      max-width: 640px;
+      color: var(--text);
+    }
+    .icon-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .icon-row:last-child { margin-bottom: 0; }
+    .icon-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent2);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .icon-row p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.85;
+    }
     @media (max-width: 768px) {
       .demo-hero, .demo-section { padding-left: 24px; padding-right: 24px; }
     }
@@ -62,63 +101,136 @@
     </div>
   </div>
 
+  <!-- Problem / Mission -->
+  <div class="demo-section">
+    <div class="lead-block">
+      <div class="section-label marker-label">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
+        Problem
+      </div>
+      <p>Digital tools tend to be reactive by default — they wait to be asked, and forget the moment you close the app.</p>
+    </div>
+    <div class="lead-block">
+      <div class="section-label marker-label">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /><circle cx="12" cy="12" r="10" /></svg>
+        Mission
+      </div>
+      <p>Designing for genuine continuity — memory, tone, and context that build over time instead of resetting with every session.</p>
+    </div>
+  </div>
+
   <!-- Overview -->
   <div class="demo-section">
     <div class="section-label">Overview</div>
-    <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.85; margin-bottom: 20px;">
-      Most AI chat apps forget everything between sessions. This one builds a living
-      understanding of the user over time — not just a log of past messages, but a
-      synthesized picture of who they are, updated continuously as the relationship develops.
-    </p>
-    <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.85; margin-bottom: 20px;">
-      It doesn't wait to be asked. If someone mentions a person, a commitment, or a goal
-      in passing conversation, it catches it and acts on it — logging it, remembering it,
-      following up later — the way a genuinely attentive friend would, without turning
-      every message into a form to fill out.
-    </p>
-    <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.85; margin-bottom: 20px;">
-      Goal progress is woven into natural, narrative check-ins rather than rigid trackers
-      or streak-shaming — reflecting real shape over weeks, not punishing a single off day.
-      No invented deadlines, no dashboard pressure. Progress is witnessed, not graded.
-    </p>
-    <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.85; margin-bottom: 20px;">
-      It reads tone and context to calibrate how it responds — knowing when to lean in and
-      when to back off — while staying clearly in its lane. It's not a therapist and doesn't
-      pretend to be one.
-    </p>
-    <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.85;">
-      Health, music, and daily context all feed into how it shows up — not as separate
-      dashboards, but woven into how it talks to the user, so it feels like one continuous
-      relationship rather than a set of disconnected features. A fully custom visual identity
-      and interaction language, built from scratch rather than assembled from off-the-shelf
-      chat UI patterns.
-    </p>
+
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5" /><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /><path d="M18 18a4 4 0 0 0 2-7.464" /><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /><path d="M6 18a4 4 0 0 1-2-7.464" /><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></svg>
+      </div>
+      <p>
+        Most AI chat apps forget everything between sessions. This one builds a living
+        understanding of the user over time — not just a log of past messages, but a
+        synthesized picture of who they are, updated continuously as the relationship develops.
+      </p>
+    </div>
+
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></svg>
+      </div>
+      <p>
+        It doesn't wait to be asked. If someone mentions a person, a commitment, or a goal
+        in passing conversation, it catches it and acts on it — logging it, remembering it,
+        following up later — the way a genuinely attentive friend would, without turning
+        every message into a form to fill out.
+      </p>
+    </div>
+
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" /><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" /><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" /></svg>
+      </div>
+      <p>
+        Goal progress is woven into natural, narrative check-ins rather than rigid trackers
+        or streak-shaming — reflecting real shape over weeks, not punishing a single off day.
+        No invented deadlines, no dashboard pressure. Progress is witnessed, not graded.
+      </p>
+    </div>
+
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /><path d="M3.22 8H9l.5-1 2 4 .5-2H15" /></svg>
+      </div>
+      <p>
+        It reads tone and context to calibrate how it responds — knowing when to lean in and
+        when to back off — while staying clearly in its lane. It's not a therapist and doesn't
+        pretend to be one.
+      </p>
+    </div>
+
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></svg>
+      </div>
+      <p>
+        Health, music, and daily context all feed into how it shows up — not as separate
+        dashboards, but woven into how it talks to the user, so it feels like one continuous
+        relationship rather than a set of disconnected features.
+      </p>
+    </div>
+
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg>
+      </div>
+      <p>
+        A fully custom visual identity and interaction language, built from scratch rather
+        than assembled from off-the-shelf chat UI patterns.
+      </p>
+    </div>
   </div>
 
   <!-- Under the hood -->
   <div class="demo-section">
     <div class="section-label">Under the Hood</div>
-    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
-      Built on a Node/Express backend with a tool-orchestrated Claude reasoning loop,
-      semantic memory via pgvector, and live integrations for health, music, weather,
-      news, and web search.
-    </p>
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2" /><path d="M11 13h4" /><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /></svg>
+      </div>
+      <p style="font-size: 0.95rem; line-height: 1.8;">
+        Built on a Node/Express backend with a tool-orchestrated Claude reasoning loop,
+        semantic memory via pgvector, and live integrations for health, music, weather,
+        news, and web search.
+      </p>
+    </div>
   </div>
 
   <!-- Where things stand -->
   <div class="demo-section">
     <div class="section-label">Status</div>
-    <h2 class="section-title" style="font-size: 1.6rem;">Where things stand</h2>
-    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px;">
-      The conversation engine, memory system, and emotional calibration are live and
-      running in daily use across iOS, Android, and web. The visual layer — including
-      context-responsive theming — is still evolving; the current release uses a single
-      refined palette while the adaptive version is in development.
-    </p>
-    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;">
-      Includes user-controlled data privacy — full conversation export, memory deletion,
-      and history clearing — built in from the start.
-    </p>
+    <h2 class="section-title" style="font-size: 1.6rem; margin-bottom: 24px;">Where things stand</h2>
+
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15" /><circle cx="18" cy="6" r="3" /><circle cx="6" cy="18" r="3" /><path d="M18 9a9 9 0 0 1-9 9" /></svg>
+      </div>
+      <p style="font-size: 0.95rem; line-height: 1.8;">
+        The conversation engine, memory system, and emotional calibration are live and
+        running in daily use across iOS, Android, and web. The visual layer — including
+        context-responsive theming — is still evolving; the current release uses a single
+        refined palette while the adaptive version is in development.
+      </p>
+    </div>
+
+    <div class="icon-row">
+      <div class="icon-badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>
+      </div>
+      <p style="font-size: 0.95rem; line-height: 1.8;">
+        Includes user-controlled data privacy — full conversation export, memory deletion,
+        and history clearing — built in from the start.
+      </p>
+    </div>
   </div>
 
   <!-- CTA -->
