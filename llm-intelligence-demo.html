@@ -106,6 +106,7 @@
     }
     .phase-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
     .phase-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .marker-label { display: flex; align-items: center; gap: 8px; }
     @media (max-width: 768px) {
       .demo-hero, .demo-section { padding-left: 24px; padding-right: 24px; }
       .ticker-grid { grid-template-columns: repeat(5, 1fr); }
@@ -154,6 +155,32 @@
         <div class="stat-label">Market Events</div>
       </div>
     </div>
+  </div>
+
+  <!-- Plain-language & technical overview -->
+  <div class="demo-section">
+    <div class="section-label marker-label">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
+      In Plain Terms
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.85; margin-bottom: 32px; max-width: 720px;">
+      Reading through a company's earnings reports and figuring out whether the news
+      is good or bad takes time. This tool reads the report, summarizes it, and scores
+      the tone — positive, negative, or neutral — in seconds, across multiple companies
+      at once.
+    </p>
+
+    <div class="section-label marker-label">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2" /><path d="M11 13h4" /><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /></svg>
+      Under the Hood
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; max-width: 720px;">
+      BART handles abstractive summarization, FinBERT (fine-tuned specifically for
+      financial text) scores sentiment, and YAKE extracts key terms. A second layer
+      pulls 10 years of price history for 10 tickers via yfinance, detects significant
+      price-move events, and trains a GradientBoosting model to study how markets
+      react to earnings.
+    </p>
   </div>
 
   <!-- What was built -->

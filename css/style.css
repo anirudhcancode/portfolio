@@ -378,7 +378,6 @@ section {
   font-size: 0.9rem;
   color: var(--text-muted);
   line-height: 1.7;
-  flex: 1;
   margin-bottom: 24px;
 }
 
@@ -421,6 +420,7 @@ section {
 .project-links {
   display: flex;
   gap: 12px;
+  margin-top: auto;
 }
 
 .project-link {

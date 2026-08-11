@@ -146,6 +146,7 @@
       color: var(--text-muted);
       line-height: 1.7;
     }
+    .marker-label { display: flex; align-items: center; gap: 8px; }
     @media (max-width: 768px) {
       .demo-hero, .demo-section { padding-left: 24px; padding-right: 24px; }
       .flow-arrow { display: none; }
@@ -175,6 +176,32 @@
       This system looks at a credit card transaction and decides in milliseconds
       whether it is likely to be fraudulent or legitimate — the same way your
       bank automatically flags suspicious purchases on your card.
+    </p>
+  </div>
+
+  <!-- Plain-language & technical overview -->
+  <div class="demo-section">
+    <div class="section-label marker-label">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
+      In Plain Terms
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.85; margin-bottom: 32px; max-width: 720px;">
+      Every credit card transaction leaves a trail — amount, time, location, spending
+      pattern. This system studies 284,807 real transactions to learn what fraud
+      typically looks like, then flags new transactions that match those patterns
+      before they're approved.
+    </p>
+
+    <div class="section-label marker-label">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2" /><path d="M11 13h4" /><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /></svg>
+      Under the Hood
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; max-width: 720px;">
+      A PySpark pipeline engineers behavioral features — rolling transaction counts,
+      spending averages, time-based patterns — using Spark's distributed windowing.
+      Random Forest and XGBoost classifiers were trained and compared; Random Forest
+      was deployed via FastAPI (containerized with Docker) for its stronger recall,
+      prioritizing catching fraud over minimizing false positives.
     </p>
   </div>
 
