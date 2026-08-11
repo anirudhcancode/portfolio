@@ -52,14 +52,12 @@
           transactions. Built a PySpark ETL pipeline with behavioral feature
           engineering (rolling-window transaction patterns via Spark's distributed
           windowing), trained and compared Random Forest and XGBoost classifiers,
-          and deployed the stronger recall model via a FastAPI REST endpoint
-          containerized with Docker.
+          and deployed Random Forest via a FastAPI REST endpoint containerized
+          with Docker.
         </p>
         <div class="project-note">
-          Random Forest was selected for deployment (83% recall, 77% precision)
-          over XGBoost (84% recall, 89% precision) to prioritize catching fraud
-          over minimizing false positives — a deliberate tradeoff given the cost
-          asymmetry of missed fraud vs. flagged legitimate transactions.
+          Random Forest and XGBoost were trained and compared; Random Forest is
+          the version currently deployed via the FastAPI endpoint.
         </div>
         <div class="project-metrics">
           <div class="metric">
@@ -95,11 +93,11 @@
         </div>
         <h3>LLM Financial Report Analyzer</h3>
         <p>
-          NLP pipeline that automatically summarizes earnings call transcripts
-          and analyzes financial sentiment using open source language models.
-          BART for abstractive summarization, FinBERT for domain-specific
-          financial sentiment, and YAKE for keyword extraction. Correctly
-          identified Apple as the only negative report in the test set.
+          Reading earnings reports and gauging sentiment takes time. This tool
+          reads, summarizes, and scores the tone of financial reports in
+          seconds — built with BART for summarization, FinBERT for financial
+          sentiment, and YAKE for keyword extraction. Correctly identified
+          Apple as the only negative report in the test set.
         </p>
         <div class="project-metrics">
           <div class="metric">
@@ -141,11 +139,12 @@
         </div>
         <h3>A/B Testing & Experimentation Pipeline</h3>
         <p>
-          End-to-end experimentation platform simulating an e-commerce
-          checkout button A/B test across 10,000 users over 14 days.
-          Applied z-test for statistical significance, computed confidence
-          intervals and lift metrics, and exposed results via a REST API
-          with on-demand simulation capabilities.
+          Knowing whether a change actually performs better — not just
+          differently — matters before rolling it out. This platform
+          simulates that test: an e-commerce checkout flow A/B tested across
+          10,000 users over 14 days, using a z-test for statistical
+          significance, confidence intervals, and lift metrics, exposed via
+          REST API.
         </p>
         <div class="project-metrics">
           <div class="metric">
