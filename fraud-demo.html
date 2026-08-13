@@ -133,6 +133,19 @@
       padding: 20px 24px;
       margin: 24px 0;
     }
+    .embed-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .embed-box iframe {
+      width: 100%;
+      height: 900px;
+      border: none;
+      display: block;
+    }
     .disclaimer-title {
       font-size: 0.8rem;
       font-weight: 700;
@@ -317,6 +330,22 @@
         geographic location, device fingerprint, and spending history.
       </p>
     </div>
+
+    <!-- Interactive live model -->
+    <div class="section-label" style="margin-top: 48px;">Try It Live (Interactive)</div>
+    <h2 class="section-title" style="font-size: 1.6rem;">Adjust the inputs yourself</h2>
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px;">
+      Live inference — adjust the interpretable transaction inputs below and see the actual
+      trained Random Forest and XGBoost models respond in real time, side by side.
+    </p>
+    <div class="embed-box">
+      <iframe src="https://fraud-detection-demo-9slp.onrender.com"
+              title="Fraud Detection — Live Model Inference" loading="lazy"></iframe>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.8rem;">
+      Hosted on Render's free tier — if it's been idle, the first load can take 30-60 seconds
+      to wake up.
+    </p>
 
     <!-- Key results -->
     <div class="section-label" style="margin-top: 48px;">Results</div>
