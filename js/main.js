@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
       typeText(heroName, 'Anirudh Ravipudi', 70, () => {
         // Step 3 — type title
         setTimeout(() => {
-          typeText(typedTitle, 'Data Engineer & AI/ML Developer', 55, () => {
+          typeText(typedTitle, 'Data Engineer', 55, () => {
             // Step 4 — fade in desc and buttons
             setTimeout(() => {
               fadeIn(heroSub)
