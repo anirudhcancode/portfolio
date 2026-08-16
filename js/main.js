@@ -1,11 +1,21 @@
 // ── Cinematic hero entrance
-function typeText(element, text, speed, callback) {
+// Types a sentence made of plain/gradient segments, character by character,
+// once. Segments look like [{ text: 'plain text', gradient: false }, ...].
+function typeSegments(element, segments, speed, callback) {
+  const full = segments.map(s => s.text).join('')
   let i = 0
-  element.textContent = ''
   const interval = setInterval(() => {
-    element.textContent += text[i]
     i++
-    if (i >= text.length) {
+    let remaining = i
+    let html = ''
+    for (const seg of segments) {
+      if (remaining <= 0) break
+      const chunk = seg.text.slice(0, remaining)
+      html += seg.gradient ? `<span class="gradient-name">${chunk}</span>` : chunk
+      remaining -= chunk.length
+    }
+    element.innerHTML = html
+    if (i >= full.length) {
       clearInterval(interval)
       if (callback) callback()
     }
@@ -18,31 +28,42 @@ function fadeIn(element, duration = 600) {
 }
 
 window.addEventListener('load', () => {
-  const heroName = document.getElementById('hero-name')
-  const typedTitle = document.getElementById('typed-title')
+  const typedHeadline = document.getElementById('typed-headline')
+  const heroCursor = document.getElementById('hero-cursor')
+  const heroSnapshot = document.getElementById('hero-snapshot')
+  const heroCurrent = document.getElementById('hero-current')
+  const heroLooking = document.getElementById('hero-looking')
   const heroTag = document.getElementById('hero-tag')
-  const heroSub = document.getElementById('hero-sub')
   const heroBtns = document.getElementById('hero-btns')
 
-  if (heroName && typedTitle) {
-    // Step 1 — fade in tag
-    setTimeout(() => fadeIn(heroTag, 400), 200)
+  if (typedHeadline) {
+    const headlineSegments = [
+      { text: "Hi, I'm ", gradient: false },
+      { text: 'Anirudh Ravipudi', gradient: true },
+      { text: '. I build systems that turn data into decisions.', gradient: false }
+    ]
 
-    // Step 2 — type name
+    // Step 1 — type the headline once, then stop the cursor
     setTimeout(() => {
-      typeText(heroName, 'Anirudh Ravipudi', 70, () => {
-        // Step 3 — type title
+      typeSegments(typedHeadline, headlineSegments, 50, () => {
+        if (heroCursor) heroCursor.style.display = 'none'
+
+        // Step 2 — cascade the rest of the hero in
         setTimeout(() => {
-          typeText(typedTitle, 'Data Engineer', 55, () => {
-            // Step 4 — fade in desc and buttons
+          fadeIn(heroSnapshot)
+          setTimeout(() => {
+            fadeIn(heroCurrent)
             setTimeout(() => {
-              fadeIn(heroSub)
-              setTimeout(() => fadeIn(heroBtns), 300)
-            }, 400)
-          })
+              fadeIn(heroLooking)
+              setTimeout(() => {
+                fadeIn(heroTag)
+                setTimeout(() => fadeIn(heroBtns), 250)
+              }, 200)
+            }, 200)
+          }, 200)
         }, 300)
       })
-    }, 600)
+    }, 400)
   }
 
   // ── Active nav link
