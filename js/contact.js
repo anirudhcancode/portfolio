@@ -1,3 +1,19 @@
+// ── Terminal contact form entrance (typeCommand/fadeIn defined in main.js)
+window.addEventListener('load', () => {
+  const cmdEl = document.getElementById('contact-cmd')
+  const termForm = document.getElementById('term-form')
+
+  if (cmdEl) {
+    setTimeout(() => {
+      typeCommand(cmdEl, 'contact --new', 38, () => {
+        setTimeout(() => {
+          if (termForm) fadeIn(termForm, 400)
+        }, 300)
+      })
+    }, 400)
+  }
+})
+
 // ── Breathing dots for Contact page
 const canvas = document.getElementById('particles')
 if (canvas) {

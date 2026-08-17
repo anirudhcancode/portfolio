@@ -20,7 +20,10 @@ function fadeIn(element, duration = 600) {
 
 window.addEventListener('load', () => {
   const heroBtns = document.getElementById('hero-btns')
-  const terminal = document.querySelector('.terminal')
+  // Scoped to the homepage hero terminal specifically (by its first command
+  // id) so this doesn't also try to run on other pages' .terminal elements,
+  // like the contact form.
+  const terminal = document.getElementById('cmd-1') ? document.querySelector('.terminal') : null
 
   if (terminal) {
     const CHAR_SPEED = 38

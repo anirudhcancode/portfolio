@@ -241,6 +241,86 @@ nav {
   }
 }
 
+/* ── Terminal contact form (reuses .terminal / .terminal-chrome / .terminal-body) ── */
+.term-form {
+  margin-top: 18px;
+  opacity: 0;
+}
+
+.term-field {
+  margin-bottom: 22px;
+}
+
+.term-field-label {
+  display: block;
+  color: #9ca3af;
+  margin-bottom: 8px;
+  cursor: text;
+}
+
+.term-input {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  color: #e6edf3;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 6px 2px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.term-input::placeholder {
+  color: #4b5563;
+}
+
+.term-input:focus {
+  border-bottom-color: #4ade80;
+}
+
+.term-textarea {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  padding: 10px 12px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.term-textarea:focus {
+  border-color: #4ade80;
+  border-bottom-color: #4ade80;
+}
+
+.term-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #e6edf3;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  padding: 10px 22px;
+  margin-top: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.term-submit:hover,
+.term-submit:focus-visible {
+  border-color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+}
+
+.term-submit .term-prompt {
+  color: #4ade80;
+}
+
 .hero-btns {
   display: flex;
   gap: 16px;
