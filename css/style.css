@@ -624,19 +624,16 @@ section {
   margin-top: 4px;
 }
 
-/* ── At a Glance ticker (homepage only — .stats-bar/.stat-item stay
+/* ── At a Glance badges (homepage only — .stats-bar/.stat-item stay
    untouched since other pages reuse them as a static row) ── */
 .marquee {
   overflow: hidden;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 22px 0;
+  padding: 28px 0;
   margin-bottom: 80px;
 }
 
 .marquee-track {
   display: flex;
-  align-items: baseline;
   width: max-content;
   animation: marquee-scroll 26s linear infinite;
 }
@@ -645,37 +642,54 @@ section {
   animation-play-state: paused;
 }
 
+.marquee-half {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-shrink: 0;
+  margin-right: 28px;
+}
+
 .marquee-group {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  gap: 28px;
   flex-shrink: 0;
-  white-space: nowrap;
 }
 
-.ticker-stat {
+.badge {
   display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
+  align-items: stretch;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.badge-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg3);
+  color: var(--text-muted);
+  padding: 8px 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   white-space: nowrap;
 }
 
-.ticker-num {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--accent1);
-}
-
-.ticker-label {
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: var(--text-muted);
-}
-
-.ticker-sep {
-  margin: 0 28px;
-  color: var(--text-muted);
-  opacity: 0.45;
-  font-size: 1rem;
+.badge-right {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--accent2), var(--accent1));
+  color: #fff;
+  padding: 8px 14px;
+  font-weight: 800;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
 }
 
 @keyframes marquee-scroll {
@@ -689,23 +703,24 @@ section {
     width: 100%;
     justify-content: center;
   }
-  .marquee-copy {
+  .marquee-half.marquee-copy {
     display: none;
   }
-  .marquee-group:not(.marquee-copy) > .ticker-sep:last-child {
+  .marquee-half:not(.marquee-copy) .marquee-group:not(.marquee-group-primary) {
     display: none;
+  }
+  .marquee-half:not(.marquee-copy) {
+    margin-right: 0;
   }
 }
 
 @media (max-width: 768px) {
-  .ticker-num {
-    font-size: 0.95rem;
+  .badge {
+    font-size: 0.72rem;
   }
-  .ticker-label {
-    font-size: 0.85rem;
-  }
-  .ticker-sep {
-    margin: 0 18px;
+  .badge-left,
+  .badge-right {
+    padding: 7px 10px;
   }
 }
 
