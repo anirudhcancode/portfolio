@@ -624,103 +624,100 @@ section {
   margin-top: 4px;
 }
 
-/* ── At a Glance badges (homepage only — .stats-bar/.stat-item stay
+/* ── At a Glance stat badges (homepage only — .stats-bar/.stat-item stay
    untouched since other pages reuse them as a static row) ── */
-.marquee {
+.stats-ticker-wrapper {
   overflow: hidden;
-  padding: 28px 0;
+  padding: 32px 0;
   margin-bottom: 80px;
 }
 
-.marquee-track {
+.stats-ticker-track {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 26s linear infinite;
+  animation: stats-ticker-scroll 26s linear infinite;
 }
 
-.marquee:hover .marquee-track {
+.stats-ticker-wrapper:hover .stats-ticker-track {
   animation-play-state: paused;
 }
 
-.marquee-half {
+.stat-badge {
   display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-shrink: 0;
-  margin-right: 28px;
-}
-
-.marquee-group {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-shrink: 0;
-}
-
-.badge {
-  display: inline-flex;
   align-items: stretch;
   border-radius: 999px;
   overflow: hidden;
   flex-shrink: 0;
-  font-size: 0.8rem;
-  font-weight: 600;
-  line-height: 1;
+  margin-right: 24px;
+  background: var(--bg3);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
-.badge-left {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--bg3);
+.stat-badge .icon {
+  align-self: center;
   color: var(--text-muted);
-  padding: 8px 14px;
+  width: 24px;
+  height: 24px;
+  margin: 0 0 0 26px;
+}
+
+.badge-label {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  padding: 18px 26px 18px 10px;
   white-space: nowrap;
 }
 
-.badge-right {
-  display: inline-flex;
+.badge-value {
+  display: flex;
   align-items: center;
   background: linear-gradient(135deg, var(--accent2), var(--accent1));
   color: #fff;
-  padding: 8px 14px;
+  font-size: 20px;
   font-weight: 800;
+  padding: 18px 26px;
   border-left: 1px solid rgba(0, 0, 0, 0.15);
   white-space: nowrap;
 }
 
-@keyframes marquee-scroll {
+@keyframes stats-ticker-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
+  .stats-ticker-track {
     animation: none;
     width: 100%;
     justify-content: center;
   }
-  .marquee-half.marquee-copy {
+  .stat-badge-copy {
     display: none;
   }
-  .marquee-half:not(.marquee-copy) .marquee-group:not(.marquee-group-primary) {
-    display: none;
-  }
-  .marquee-half:not(.marquee-copy) {
+  .stat-badge:nth-child(3) {
     margin-right: 0;
   }
 }
 
 @media (max-width: 768px) {
-  .badge {
-    font-size: 0.72rem;
+  .badge-label {
+    font-size: 15px;
+    padding: 11px 14px 11px 6px;
   }
-  .badge-left,
-  .badge-right {
-    padding: 7px 10px;
+  .badge-value {
+    font-size: 16px;
+    padding: 11px 14px;
+  }
+  .stat-badge .icon {
+    margin-left: 14px;
+  }
+  .stat-badge {
+    margin-right: 16px;
   }
 }
 
