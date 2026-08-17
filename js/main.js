@@ -81,6 +81,31 @@ window.addEventListener('load', () => {
   })
 })
 
+// ── At a Glance stat rotator (homepage only)
+const statRotatorItems = document.querySelectorAll('.stat-rotator-item')
+if (statRotatorItems.length > 1) {
+  const DISPLAY_MS = 2500
+  const TRANSITION_MS = 350
+  let activeIndex = Array.from(statRotatorItems).findIndex(item => item.classList.contains('is-active'))
+  if (activeIndex === -1) activeIndex = 0
+
+  setInterval(() => {
+    const currentItem = statRotatorItems[activeIndex]
+    const nextIndex = (activeIndex + 1) % statRotatorItems.length
+    const nextItem = statRotatorItems[nextIndex]
+
+    currentItem.classList.remove('is-active')
+    currentItem.classList.add('is-leaving')
+
+    setTimeout(() => {
+      currentItem.classList.remove('is-leaving')
+      nextItem.classList.add('is-active')
+    }, TRANSITION_MS)
+
+    activeIndex = nextIndex
+  }, DISPLAY_MS)
+}
+
 // ── Fade in on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {

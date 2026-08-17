@@ -624,22 +624,33 @@ section {
   margin-top: 4px;
 }
 
-/* ── At a Glance stat badges (homepage only — .stats-bar/.stat-item stay
+/* ── At a Glance stat rotator (homepage only — .stats-bar/.stat-item stay
    untouched since other pages reuse them as a static row) ── */
-.stats-ticker-wrapper {
-  overflow: hidden;
-  padding: 32px 0;
+.stats-rotator {
+  position: relative;
+  height: 80px;
   margin-bottom: 80px;
 }
 
-.stats-ticker-track {
-  display: flex;
-  width: max-content;
-  animation: stats-ticker-scroll 26s linear infinite;
+.stat-rotator-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 20px));
+  opacity: 0;
+  transition: transform 350ms ease, opacity 350ms ease;
+  pointer-events: none;
 }
 
-.stats-ticker-wrapper:hover .stats-ticker-track {
-  animation-play-state: paused;
+.stat-rotator-item.is-active {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.stat-rotator-item.is-leaving {
+  transform: translate(-50%, calc(-50% - 20px));
+  opacity: 0;
 }
 
 .stat-badge {
@@ -648,7 +659,6 @@ section {
   border-radius: 999px;
   overflow: hidden;
   flex-shrink: 0;
-  margin-right: 24px;
   background: var(--bg3);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
@@ -685,26 +695,19 @@ section {
   white-space: nowrap;
 }
 
-@keyframes stats-ticker-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .stats-ticker-track {
-    animation: none;
-    width: 100%;
-    justify-content: center;
-  }
-  .stat-badge-copy {
-    display: none;
-  }
-  .stat-badge:nth-child(3) {
-    margin-right: 0;
+  .stat-rotator-item,
+  .stat-rotator-item.is-active,
+  .stat-rotator-item.is-leaving {
+    transform: translate(-50%, -50%);
+    transition: opacity 350ms ease;
   }
 }
 
 @media (max-width: 768px) {
+  .stats-rotator {
+    height: 64px;
+  }
   .badge-label {
     font-size: 15px;
     padding: 11px 14px 11px 6px;
@@ -715,9 +718,6 @@ section {
   }
   .stat-badge .icon {
     margin-left: 14px;
-  }
-  .stat-badge {
-    margin-right: 16px;
   }
 }
 
