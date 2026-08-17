@@ -1,21 +1,12 @@
-// ── Cinematic hero entrance
-// Types a sentence made of plain/gradient segments, character by character,
-// once. Segments look like [{ text: 'plain text', gradient: false }, ...].
-function typeSegments(element, segments, speed, callback) {
-  const full = segments.map(s => s.text).join('')
+// ── Terminal hero entrance
+// Types a command's text into an element, character by character, once.
+function typeCommand(element, text, speed, callback) {
   let i = 0
+  element.textContent = ''
   const interval = setInterval(() => {
+    element.textContent += text[i]
     i++
-    let remaining = i
-    let html = ''
-    for (const seg of segments) {
-      if (remaining <= 0) break
-      const chunk = seg.text.slice(0, remaining)
-      html += seg.gradient ? `<span class="gradient-name">${chunk}</span>` : chunk
-      remaining -= chunk.length
-    }
-    element.innerHTML = html
-    if (i >= full.length) {
+    if (i >= text.length) {
       clearInterval(interval)
       if (callback) callback()
     }
@@ -28,42 +19,47 @@ function fadeIn(element, duration = 600) {
 }
 
 window.addEventListener('load', () => {
-  const typedHeadline = document.getElementById('typed-headline')
-  const heroCursor = document.getElementById('hero-cursor')
-  const heroSnapshot = document.getElementById('hero-snapshot')
-  const heroCurrent = document.getElementById('hero-current')
-  const heroLooking = document.getElementById('hero-looking')
-  const heroTag = document.getElementById('hero-tag')
   const heroBtns = document.getElementById('hero-btns')
+  const terminal = document.querySelector('.terminal')
 
-  if (typedHeadline) {
-    const headlineSegments = [
-      { text: "Hi, I'm ", gradient: false },
-      { text: 'Anirudh Ravipudi', gradient: true },
-      { text: '. I build systems that turn data into decisions.', gradient: false }
+  if (terminal) {
+    const CHAR_SPEED = 38
+    const PAUSE_BETWEEN_COMMANDS = 650
+    const OUTPUT_REVEAL_DELAY = 150
+
+    const commands = [
+      { cmdId: 'cmd-1', outId: 'out-1', text: 'whoami' },
+      { cmdId: 'cmd-2', outId: 'out-2', text: 'role --current' },
+      { cmdId: 'cmd-3', outId: 'out-3', text: 'cat about.txt' },
+      { cmdId: 'cmd-4', outId: 'out-4', text: 'status --current-work' },
+      { cmdId: 'cmd-5', outId: 'out-5', text: 'status --seeking' },
+      { cmdId: 'cmd-6', outId: 'out-6', text: 'availability' }
     ]
 
-    // Step 1 — type the headline once, then stop the cursor
-    setTimeout(() => {
-      typeSegments(typedHeadline, headlineSegments, 50, () => {
-        if (heroCursor) heroCursor.style.display = 'none'
-
-        // Step 2 — cascade the rest of the hero in
+    function runCommand(index) {
+      if (index >= commands.length) {
+        // Sequence complete — reveal the idle prompt, then the buttons
         setTimeout(() => {
-          fadeIn(heroSnapshot)
-          setTimeout(() => {
-            fadeIn(heroCurrent)
-            setTimeout(() => {
-              fadeIn(heroLooking)
-              setTimeout(() => {
-                fadeIn(heroTag)
-                setTimeout(() => fadeIn(heroBtns), 250)
-              }, 200)
-            }, 200)
-          }, 200)
+          const finalLine = document.getElementById('term-final-line')
+          if (finalLine) fadeIn(finalLine, 400)
+          setTimeout(() => fadeIn(heroBtns), 400)
         }, 300)
+        return
+      }
+
+      const { cmdId, outId, text } = commands[index]
+      const cmdEl = document.getElementById(cmdId)
+      const outEl = document.getElementById(outId)
+
+      typeCommand(cmdEl, text, CHAR_SPEED, () => {
+        setTimeout(() => {
+          outEl.classList.add('visible')
+          setTimeout(() => runCommand(index + 1), PAUSE_BETWEEN_COMMANDS)
+        }, OUTPUT_REVEAL_DELAY)
       })
-    }, 400)
+    }
+
+    setTimeout(() => runCommand(0), 500)
   }
 
   // ── Active nav link
