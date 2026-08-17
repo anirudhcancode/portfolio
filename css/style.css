@@ -127,11 +127,27 @@ nav {
 
 /* ── Gradient name (reuses the site's blue-to-red hero gradient) ── */
 .gradient-name {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
   background: linear-gradient(135deg, var(--accent2) 0%, #7c5ba0 50%, var(--accent1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.gradient-name::before {
+  content: '';
+  position: absolute;
+  top: 0.32em;
+  bottom: 0.28em;
+  left: -0.15em;
+  right: -0.15em;
+  background: rgba(255, 235, 59, 0.35);
+  border-radius: 3px;
+  transform: rotate(-1.5deg);
+  z-index: -1;
 }
 
 /* ── Blinking cursor ── */
