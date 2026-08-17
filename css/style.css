@@ -624,18 +624,19 @@ section {
   margin-top: 4px;
 }
 
-/* ── At a Glance marquee (homepage only — .stats-bar/.stat-item stay
+/* ── At a Glance ticker (homepage only — .stats-bar/.stat-item stay
    untouched since other pages reuse them as a static row) ── */
 .marquee {
   overflow: hidden;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 22px 0;
   margin-bottom: 80px;
 }
 
 .marquee-track {
   display: flex;
+  align-items: baseline;
   width: max-content;
   animation: marquee-scroll 26s linear infinite;
 }
@@ -646,18 +647,35 @@ section {
 
 .marquee-group {
   display: flex;
+  align-items: baseline;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
-.marquee-item {
-  flex-shrink: 0;
-  padding: 32px 56px;
-  text-align: center;
-  border-right: 1px solid var(--border);
+.ticker-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
 }
 
-.marquee-item-last {
-  border-right: none;
+.ticker-num {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent1);
+}
+
+.ticker-label {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.ticker-sep {
+  margin: 0 28px;
+  color: var(--text-muted);
+  opacity: 0.45;
+  font-size: 1rem;
 }
 
 @keyframes marquee-scroll {
@@ -669,16 +687,25 @@ section {
   .marquee-track {
     animation: none;
     width: 100%;
-    justify-content: space-around;
+    justify-content: center;
   }
   .marquee-copy {
+    display: none;
+  }
+  .marquee-group:not(.marquee-copy) > .ticker-sep:last-child {
     display: none;
   }
 }
 
 @media (max-width: 768px) {
-  .marquee-item {
-    padding: 24px 32px;
+  .ticker-num {
+    font-size: 0.95rem;
+  }
+  .ticker-label {
+    font-size: 0.85rem;
+  }
+  .ticker-sep {
+    margin: 0 18px;
   }
 }
 
