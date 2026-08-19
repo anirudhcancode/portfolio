@@ -1098,7 +1098,7 @@ body.light-mode .back-to-top {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: var(--bg3);
+  background: #142b45;
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -1107,6 +1107,10 @@ body.light-mode .back-to-top {
   z-index: 300;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s, box-shadow 0.2s;
+}
+
+body.light-mode .krypto-launcher {
+  background: #f1f0ec;
 }
 
 .krypto-launcher:hover {
