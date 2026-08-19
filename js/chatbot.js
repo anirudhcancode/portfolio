@@ -6,6 +6,20 @@
   const FETCH_TIMEOUT_MS = 45000 // generous enough to cover a Render free-tier cold start
 
   const GREETING = "Woof! I'm Krypto, Anirudh's digital good boy 🐾 Ask me anything about his work — I promise not to fetch you anything boring."
+  const TEASER_TEXT = "Psst — got questions? Ask me anything 🐾"
+  const TEASER_DELAY_MS = 3000
+  const TEASER_AUTO_DISMISS_MS = 7000
+
+  const SESSION_KEY_TEASER_SHOWN = 'krypto_teaser_shown'
+  const SESSION_KEY_PANEL_OPENED = 'krypto_panel_opened'
+
+  function sessionGet(key) {
+    try { return sessionStorage.getItem(key) === '1' } catch (e) { return false }
+  }
+
+  function sessionSet(key) {
+    try { sessionStorage.setItem(key, '1') } catch (e) { /* private mode etc -- fine to skip */ }
+  }
 
   const ICON_PAW = '<circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" />'
   const ICON_X = '<line x1="18" x2="6" y1="6" y2="18" /><line x1="6" x2="18" y1="6" y2="18" />'
@@ -45,8 +59,13 @@
     </div>
   `
 
+  const teaser = document.createElement('div')
+  teaser.className = 'krypto-teaser'
+  teaser.textContent = TEASER_TEXT
+
   document.body.appendChild(launcher)
   document.body.appendChild(panel)
+  document.body.appendChild(teaser)
 
   const messagesEl = panel.querySelector('.krypto-messages')
   const inputEl = panel.querySelector('.krypto-input')
@@ -131,6 +150,8 @@
 
   function openPanel() {
     panel.classList.add('is-open')
+    sessionSet(SESSION_KEY_PANEL_OPENED)
+    dismissTeaser()
     if (!hasGreeted) {
       hasGreeted = true
       addMessage(GREETING, 'bot')
@@ -141,6 +162,35 @@
   function closePanel() {
     panel.classList.remove('is-open')
   }
+
+  let teaserDismissTimer = null
+
+  function showTeaser() {
+    teaser.classList.add('is-visible')
+    teaserDismissTimer = setTimeout(dismissTeaser, TEASER_AUTO_DISMISS_MS)
+  }
+
+  function dismissTeaser() {
+    teaser.classList.remove('is-visible')
+    if (teaserDismissTimer) {
+      clearTimeout(teaserDismissTimer)
+      teaserDismissTimer = null
+    }
+  }
+
+  if (!sessionGet(SESSION_KEY_PANEL_OPENED) && !sessionGet(SESSION_KEY_TEASER_SHOWN)) {
+    setTimeout(() => {
+      if (sessionGet(SESSION_KEY_PANEL_OPENED)) return
+      sessionSet(SESSION_KEY_TEASER_SHOWN)
+      showTeaser()
+    }, TEASER_DELAY_MS)
+  }
+
+  document.addEventListener('click', () => {
+    if (teaser.classList.contains('is-visible')) {
+      dismissTeaser()
+    }
+  })
 
   launcher.addEventListener('click', () => {
     if (panel.classList.contains('is-open')) {
