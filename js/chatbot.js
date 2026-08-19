@@ -2,8 +2,8 @@
 // Self-injecting, like the theme-toggle/back-to-top buttons in main.js, so a
 // single <script src="js/chatbot.js"> include is all any page needs.
 (function () {
-  const API_URL = 'https://portfolio-chatbot-api-thoo.onrender.com/chat'
-  const FETCH_TIMEOUT_MS = 45000 // generous enough to cover a Render free-tier cold start
+  const API_URL = 'https://portfolio-chatbot-api-production.up.railway.app/chat'
+  const FETCH_TIMEOUT_MS = 45000 // generous timeout for slow connections
 
   const GREETING = "Woof! I'm Krypto, Anirudh's digital good boy 🐾 Ask me anything about his work — I promise not to fetch you anything boring."
   const TEASER_TEXT = "Psst — got questions? Ask me anything 🐾"
