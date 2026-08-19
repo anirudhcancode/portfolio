@@ -2,7 +2,8 @@
 // Self-injecting, like the theme-toggle/back-to-top buttons in main.js, so a
 // single <script src="js/chatbot.js"> include is all any page needs.
 (function () {
-  const API_URL = 'https://portfolio-chatbot-api.onrender.com/chat'
+  const API_URL = 'https://portfolio-chatbot-api-thoo.onrender.com/chat'
+  const FETCH_TIMEOUT_MS = 45000 // generous enough to cover a Render free-tier cold start
 
   const GREETING = "Woof! I'm Krypto, Anirudh's digital good boy 🐾 Ask me anything about his work — I promise not to fetch you anything boring."
 
@@ -87,11 +88,15 @@
     setLoading(true)
     const typingEl = showTyping()
 
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
+
     try {
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: history.slice(-10) })
+        body: JSON.stringify({ message: text, history: history.slice(-10) }),
+        signal: controller.signal
       })
 
       const data = await res.json().catch(() => null)
@@ -104,6 +109,7 @@
           : "Ruff, something went sideways on my end. Try again in a moment?"
         addMessage(friendly, 'error')
         setLoading(false)
+        clearTimeout(timeoutId)
         return
       }
 
@@ -113,9 +119,13 @@
       history.push({ role: 'assistant', content: reply })
     } catch (err) {
       typingEl.remove()
-      addMessage("Can't reach the doghouse right now — check your connection and try again.", 'error')
+      const message = err && err.name === 'AbortError'
+        ? "Taking a while to wake up over here — Krypto naps hard on the free tier. Try again in a few seconds?"
+        : "Can't reach the doghouse right now — check your connection and try again."
+      addMessage(message, 'error')
     }
 
+    clearTimeout(timeoutId)
     setLoading(false)
   }
 
