@@ -63,9 +63,15 @@
   teaser.className = 'krypto-teaser'
   teaser.textContent = TEASER_TEXT
 
+  const hoverTip = document.createElement('div')
+  hoverTip.className = 'krypto-hover-tip'
+  hoverTip.textContent = 'Woof! 🐾'
+  hoverTip.setAttribute('aria-hidden', 'true')
+
   document.body.appendChild(launcher)
   document.body.appendChild(panel)
   document.body.appendChild(teaser)
+  document.body.appendChild(hoverTip)
 
   const messagesEl = panel.querySelector('.krypto-messages')
   const inputEl = panel.querySelector('.krypto-input')
@@ -167,6 +173,7 @@
 
   function showTeaser() {
     teaser.classList.add('is-visible')
+    hoverTip.classList.remove('is-visible')
     teaserDismissTimer = setTimeout(dismissTeaser, TEASER_AUTO_DISMISS_MS)
   }
 
@@ -198,6 +205,15 @@
     } else {
       openPanel()
     }
+  })
+
+  launcher.addEventListener('mouseenter', () => {
+    if (teaser.classList.contains('is-visible')) return
+    hoverTip.classList.add('is-visible')
+  })
+
+  launcher.addEventListener('mouseleave', () => {
+    hoverTip.classList.remove('is-visible')
   })
 
   closeBtn.addEventListener('click', closePanel)
