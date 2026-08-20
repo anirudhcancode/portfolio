@@ -129,6 +129,15 @@ nav {
   }
   .hero-content .terminal {
     width: 100%;
+    /* In row layout (desktop) this 700px flex-basis sizes the terminal's
+       width. Once flex-direction flips to column here, the same flex-basis
+       applies to height instead, silently capping the terminal well short
+       of its content and clipping the rest via .terminal's overflow:
+       hidden -- with no way to reach it, since nothing scrolls that box.
+       Reset it to a natural, content-sized height. */
+    flex: none;
+    max-height: none;
+    overflow: visible;
   }
   .hero-right {
     width: 100%;

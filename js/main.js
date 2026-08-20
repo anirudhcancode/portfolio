@@ -33,10 +33,11 @@ window.addEventListener('load', () => {
     const commands = [
       { cmdId: 'cmd-1', outId: 'out-1', text: 'whoami' },
       { cmdId: 'cmd-2', outId: 'out-2', text: 'role --current' },
-      { cmdId: 'cmd-3', outId: 'out-3', text: 'cat about.txt' },
-      { cmdId: 'cmd-4', outId: 'out-4', text: 'status --current-work' },
-      { cmdId: 'cmd-5', outId: 'out-5', text: 'status --seeking' },
-      { cmdId: 'cmd-6', outId: 'out-6', text: 'availability' }
+      { cmdId: 'cmd-3', outId: 'out-3', text: 'location' },
+      { cmdId: 'cmd-4', outId: 'out-4', text: 'cat about.txt' },
+      { cmdId: 'cmd-5', outId: 'out-5', text: 'status --current-work' },
+      { cmdId: 'cmd-6', outId: 'out-6', text: 'status --seeking' },
+      { cmdId: 'cmd-7', outId: 'out-7', text: 'availability' }
     ]
 
     function runCommand(index) {
